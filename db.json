@@ -1,0 +1,45 @@
+{
+  "enquiry": [
+    {
+      "firstName": "Ali",
+      "lastName": "Bayramli edited",
+      "email": "alibayramli@gmail.com",
+      "mobile": "12345",
+      "weight": 76,
+      "height": 1.77,
+      "bmi": 24.258674071946118,
+      "bmiResult": "Normal",
+      "gender": "Male",
+      "requireTrainer": "No",
+      "package": "Yearly",
+      "importantGoal": [
+        "Energy and Endurance",
+        "Building Lean Muscle"
+      ],
+      "haveBeenInGymBefore": "No",
+      "enquiryDate": "2023-02-28T20:00:00.000Z",
+      "id": 5
+    },
+    {
+      "firstName": "demo first",
+      "lastName": "demo first",
+      "email": "demo@gmail.com",
+      "mobile": "12345",
+      "weight": 76,
+      "height": 1.81,
+      "bmi": 23.198315069747565,
+      "bmiResult": "Normal",
+      "gender": "Male",
+      "requireTrainer": "Yes",
+      "package": "Quarterly",
+      "importantGoals": [
+        "Healthier Digestive System",
+        "Sugar Craving Body",
+        "Fitness"
+      ],
+      "haveBeenInGymBefore": "Yes",
+      "enquiryDate": "2023-03-15T20:00:00.000Z",
+      "id": 8
+    }
+  ]
+}
