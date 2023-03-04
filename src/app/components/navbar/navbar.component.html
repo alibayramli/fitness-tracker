@@ -5,4 +5,15 @@
   <button mat-raised-button color="accent" routerLink="/list">
     View Enquiries
   </button>
+
+  <button
+    mat-icon-button
+    (click)="themeService.toggleThemeMode()"
+    class="theme-toggle"
+    aria-label="Toggle Dark Theme"
+  >
+    <mat-icon>{{
+      (themeService.isDarkMode$ | async) ? "light_mode" : "dark_mode"
+    }}</mat-icon>
+  </button>
 </mat-toolbar>
