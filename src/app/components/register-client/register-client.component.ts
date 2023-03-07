@@ -3,10 +3,21 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 
 import { NgToastService } from 'ng-angular-popup';
-import { switchMap } from 'rxjs';
+import { combineLatest, filter, switchMap, tap } from 'rxjs';
 
 import { IClient } from 'src/app/models/client.model';
 import { ApiService } from 'src/app/services/api.service';
+import {
+  TRAINER_OPTIONS,
+  GENDERS,
+  PACKAGES,
+  IMPORTANT_GOALS,
+  HAVE_BEEN_IN_GYM_BEFORE,
+  MIN_HEIGHT,
+  MAX_HEIGHT,
+  MIN_WEIGHT,
+  MAX_WEIGHT,
+} from './register-client.constant';
 
 @Component({
   selector: 'app-register-client',
@@ -14,18 +25,15 @@ import { ApiService } from 'src/app/services/api.service';
   styleUrls: ['./register-client.component.scss'],
 })
 export class RegisterClientComponent implements OnInit {
-  public trainerOptions = ['Yes', 'No'];
-  public genders = ['Male', 'Female'];
-  public packages = ['Monthly', 'Quarterly', 'Yearly'];
-  public importantGoals = [
-    'Toxic Fat reduction',
-    'Energy and Endurance',
-    'Building Lean Muscle',
-    'Healthier Digestive System',
-    'Sugar Craving Body',
-    'Fitness',
-  ];
-  public haveBeenInGymBefore = ['Yes', 'No'];
+  public readonly trainerOptions = TRAINER_OPTIONS;
+  public readonly genders = GENDERS;
+  public readonly packages = PACKAGES;
+  public readonly importantGoals = IMPORTANT_GOALS;
+  public readonly haveBeenInGymBefore = HAVE_BEEN_IN_GYM_BEFORE;
+  private readonly minHeight = MIN_HEIGHT;
+  private readonly maxHeight = MAX_HEIGHT;
+  private readonly minWeight = MIN_WEIGHT;
+  private readonly maxWeight = MAX_WEIGHT;
   public registerForm!: FormGroup;
   public clientIdToUpdate!: number;
   public isUpdateActive = false;
@@ -44,11 +52,22 @@ export class RegisterClientComponent implements OnInit {
       lastName: ['', Validators.required],
       email: ['', [Validators.email]],
       mobile: [''],
+      height: [
+        '',
+        Validators.compose([
+          Validators.required,
+          Validators.min(this.minHeight),
+          Validators.max(this.maxHeight),
+        ]),
+      ],
       weight: [
         '',
-        Validators.compose([Validators.min(5), Validators.max(300)]),
+        Validators.compose([
+          Validators.required,
+          Validators.min(this.minWeight),
+          Validators.max(this.maxWeight),
+        ]),
       ],
-      height: [''],
       bmi: [''],
       bmiResult: [''],
       gender: [''],
@@ -58,21 +77,28 @@ export class RegisterClientComponent implements OnInit {
       haveBeenInGymBefore: [''],
       enquiryDate: [''],
     });
-    this.registerForm.controls['weight'].valueChanges.subscribe({
-      next: (newWeightValue) => {
-        if (!newWeightValue) {
-          this.registerForm.controls['height'].patchValue('');
-        }
-      },
-    });
-    this.registerForm.controls['height'].valueChanges.subscribe({
-      next: (newHeightValue) => {
-        this.calculateBMI(newHeightValue);
-      },
-    });
+
+    combineLatest([
+      this.registerForm.controls['height'].valueChanges,
+      this.registerForm.controls['weight'].valueChanges,
+    ])
+      .pipe(
+        tap(() => {
+          if (!this.isHeightAndWeightValid) {
+            this.resetBMI();
+          }
+        }),
+        filter(() => this.isHeightAndWeightValid)
+      )
+      .subscribe({
+        next: ([height, weight]) => {
+          this.calculateBMI(height, weight);
+        },
+      });
 
     this.activatedRoute.params
       .pipe(
+        filter((paramConfig) => !!Object.keys(paramConfig).length),
         switchMap((value) => {
           this.clientIdToUpdate = value['id'];
           return this.apiService.getClientById(this.clientIdToUpdate);
@@ -86,9 +112,16 @@ export class RegisterClientComponent implements OnInit {
       });
   }
 
+  private get isHeightAndWeightValid() {
+    return (
+      this.registerForm.controls['height'].valid &&
+      this.registerForm.controls['weight'].valid
+    );
+  }
+
   public submitClient() {
     this.apiService.addClient(this.registerForm.value).subscribe({
-      next: (res) => {
+      next: () => {
         this.toastService.success({
           detail: 'Success',
           summary: 'Enquiry Added',
@@ -96,6 +129,7 @@ export class RegisterClientComponent implements OnInit {
         });
 
         this.registerForm.reset();
+        this.router.navigate(['list']);
       },
     });
   }
@@ -104,7 +138,7 @@ export class RegisterClientComponent implements OnInit {
     this.apiService
       .updateClient(this.registerForm.value, this.clientIdToUpdate)
       .subscribe({
-        next: (res) => {
+        next: () => {
           this.toastService.success({
             detail: 'Success',
             summary: 'Enquiry Updated',
@@ -120,11 +154,11 @@ export class RegisterClientComponent implements OnInit {
   private fillFormToUpdate(client: IClient) {
     this.registerForm.setValue({
       firstName: client.firstName,
-      lastName: client.firstName,
+      lastName: client.lastName,
       email: client.email,
       mobile: client.mobile,
-      weight: client.weight,
       height: client.height,
+      weight: client.weight,
       bmi: client.bmi,
       bmiResult: client.bmiResult,
       gender: client.gender,
@@ -136,28 +170,29 @@ export class RegisterClientComponent implements OnInit {
     });
   }
 
-  private calculateBMI(heightValue: number) {
-    const weight = this.registerForm.value.weight;
-    const height = heightValue;
+  private calculateBMI(height: number, weight: number) {
     const BMI = weight / (height * height);
 
-    if (weight && heightValue) {
-      this.registerForm.controls['bmi'].patchValue(BMI);
+    this.registerForm.controls['bmi'].patchValue(BMI);
 
-      switch (true) {
-        case BMI < 18.5:
-          this.registerForm.controls['bmiResult'].patchValue('Underweight');
-          break;
-        case BMI >= 18.5 && BMI < 25:
-          this.registerForm.controls['bmiResult'].patchValue('Normal');
-          break;
-        case BMI >= 25 && BMI < 30:
-          this.registerForm.controls['bmiResult'].patchValue('Overweight');
-          break;
-        default:
-          this.registerForm.controls['bmiResult'].patchValue('Obese');
-          break;
-      }
+    switch (true) {
+      case BMI < 18.5:
+        this.registerForm.controls['bmiResult'].patchValue('Underweight');
+        break;
+      case BMI >= 18.5 && BMI < 25:
+        this.registerForm.controls['bmiResult'].patchValue('Normal');
+        break;
+      case BMI >= 25 && BMI < 30:
+        this.registerForm.controls['bmiResult'].patchValue('Overweight');
+        break;
+      default:
+        this.registerForm.controls['bmiResult'].patchValue('Obese');
+        break;
     }
+  }
+
+  private resetBMI() {
+    this.registerForm.controls['bmi'].patchValue('');
+    this.registerForm.controls['bmiResult'].patchValue('');
   }
 }

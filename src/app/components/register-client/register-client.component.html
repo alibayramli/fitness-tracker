@@ -43,6 +43,21 @@
       </div>
       <div class="col-md-6">
         <mat-form-field appearance="outline">
+          <mat-label>Height</mat-label>
+          <input
+            formControlName="height"
+            matInput
+            placeholder="height"
+            type="number"
+          />
+          <mat-icon matSuffix
+            ><i class="fa fa-text-height" aria-hidden="true"></i
+          ></mat-icon>
+          <mat-hint>Unit is meters</mat-hint>
+        </mat-form-field>
+      </div>
+      <div class="col-md-6">
+        <mat-form-field appearance="outline">
           <mat-label>Weight</mat-label>
           <input
             formControlName="weight"
@@ -52,22 +67,6 @@
           />
           <mat-icon matSuffix>line_weight</mat-icon>
           <mat-hint>Unit is KGs</mat-hint>
-        </mat-form-field>
-      </div>
-      <div class="col-md-6">
-        <mat-form-field appearance="outline">
-          <mat-label>Height</mat-label>
-          <input
-            formControlName="height"
-            [readonly]="!this.registerForm.value.weight"
-            matInput
-            placeholder="height"
-            type="number"
-          />
-          <mat-icon matSuffix
-            ><i class="fa fa-text-height" aria-hidden="true"></i
-          ></mat-icon>
-          <mat-hint>Unit is meters</mat-hint>
         </mat-form-field>
       </div>
       <div class="col-md-6 mt-3">
@@ -187,6 +186,7 @@
     <button
       *ngIf="!isUpdateActive"
       (click)="submitClient()"
+      [disabled]="!registerForm.valid"
       class="mt-4"
       mat-raised-button
       color="accent"

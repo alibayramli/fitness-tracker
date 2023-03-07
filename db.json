@@ -2,44 +2,44 @@
   "enquiry": [
     {
       "firstName": "Ali",
-      "lastName": "Bayramli edited",
-      "email": "alibayramli@gmail.com",
-      "mobile": "12345",
-      "weight": 76,
-      "height": 1.77,
-      "bmi": 24.258674071946118,
+      "lastName": "Bayramli",
+      "email": "ali@gmail.com",
+      "mobile": "1234567",
+      "weight": 75,
+      "height": 1.78,
+      "bmi": 23.671253629592222,
       "bmiResult": "Normal",
       "gender": "Male",
       "requireTrainer": "No",
-      "package": "Yearly",
-      "importantGoal": [
-        "Energy and Endurance",
-        "Building Lean Muscle"
-      ],
-      "haveBeenInGymBefore": "No",
-      "enquiryDate": "2023-02-28T20:00:00.000Z",
-      "id": 5
-    },
-    {
-      "firstName": "demo first",
-      "lastName": "demo first",
-      "email": "demo@gmail.com",
-      "mobile": "12345",
-      "weight": 76,
-      "height": 1.81,
-      "bmi": 23.198315069747565,
-      "bmiResult": "Normal",
-      "gender": "Male",
-      "requireTrainer": "Yes",
       "package": "Quarterly",
       "importantGoals": [
+        "Energy and Endurance",
         "Healthier Digestive System",
-        "Sugar Craving Body",
         "Fitness"
       ],
       "haveBeenInGymBefore": "Yes",
-      "enquiryDate": "2023-03-15T20:00:00.000Z",
-      "id": 8
+      "enquiryDate": "2023-03-22T20:00:00.000Z",
+      "id": 1
+    },
+    {
+      "firstName": "wr",
+      "lastName": "wq",
+      "email": "2wqe@gm.co",
+      "mobile": "214234",
+      "weight": 84,
+      "height": 1.87,
+      "bmi": 24.021275987303035,
+      "bmiResult": "Normal",
+      "gender": "Female",
+      "requireTrainer": "No",
+      "package": "Quarterly",
+      "importantGoals": [
+        "Toxic Fat reduction",
+        "Sugar Craving Body"
+      ],
+      "haveBeenInGymBefore": "Yes",
+      "enquiryDate": "2023-03-22T20:00:00.000Z",
+      "id": 2
     }
   ]
 }
