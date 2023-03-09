@@ -1,11 +1,13 @@
 import { Component, OnInit, OnDestroy, ViewChild } from '@angular/core';
-import { MatPaginator } from '@angular/material/paginator';
-import { MatSort } from '@angular/material/sort';
-import { MatTableDataSource } from '@angular/material/table';
-import { Router } from '@angular/router';
-
+import { Router, RouterLink } from '@angular/router';
+import { DatePipe } from '@angular/common';
+import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
+import { MatSort, MatSortModule } from '@angular/material/sort';
+import { MatTableDataSource, MatTableModule } from '@angular/material/table';
+import { MatInputModule } from '@angular/material/input';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatButtonModule } from '@angular/material/button';
 import { filter, takeUntil, Subject } from 'rxjs';
-
 import { ClientService } from 'src/app/services/client.service';
 import { DialogService } from 'src/app/shared/services/dialog.service';
 import { SnackBarService } from 'src/app/shared/services/snack-bar.service';
@@ -20,6 +22,17 @@ import {
   selector: 'app-clients-list',
   templateUrl: './clients-list.component.html',
   styleUrls: ['./clients-list.component.scss'],
+  standalone: true,
+  imports: [
+    MatButtonModule,
+    RouterLink,
+    MatFormFieldModule,
+    MatInputModule,
+    MatTableModule,
+    MatSortModule,
+    MatPaginatorModule,
+    DatePipe,
+  ],
 })
 export class ClientsListComponent implements OnInit, OnDestroy {
   public dataSource!: MatTableDataSource<IClient>;

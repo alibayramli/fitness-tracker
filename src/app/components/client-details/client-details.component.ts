@@ -1,14 +1,27 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-
+import { NgIf, NgFor } from '@angular/common';
+import { MatChipsModule } from '@angular/material/chips';
+import { MatButtonModule } from '@angular/material/button';
+import { MatListModule } from '@angular/material/list';
+import { MatCardModule } from '@angular/material/card';
 import { switchMap } from 'rxjs';
-import { IClient } from 'src/app/models/client.model';
 import { ClientService } from 'src/app/services/client.service';
+import { IClient } from 'src/app/models/client.model';
 
 @Component({
   selector: 'app-client-detail',
   templateUrl: './client-details.component.html',
   styleUrls: ['./client-details.component.scss'],
+  standalone: true,
+  imports: [
+    NgIf,
+    MatCardModule,
+    MatListModule,
+    MatButtonModule,
+    MatChipsModule,
+    NgFor,
+  ],
 })
 export class ClientDetailsComponent implements OnInit {
   public clientId!: number;
