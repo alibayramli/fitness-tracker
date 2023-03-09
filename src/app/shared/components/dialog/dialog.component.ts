@@ -8,5 +8,5 @@ import { IDialog } from '../../models/dialog.model';
   styleUrls: ['./dialog.component.scss'],
 })
 export class DialogComponent {
-  constructor(@Inject(MAT_DIALOG_DATA) public data: IDialog) {}
+  constructor(@Inject(MAT_DIALOG_DATA) public data?: IDialog) {}
 }
