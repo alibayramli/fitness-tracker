@@ -5,7 +5,7 @@ import { IClient } from '../models/client.model';
 @Injectable({
   providedIn: 'root',
 })
-export class ApiService {
+export class ClientService {
   private baseUrl = 'http://localhost:3000/enquiry';
 
   constructor(private http: HttpClient) {}

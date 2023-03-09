@@ -5,7 +5,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { combineLatest, filter, switchMap, tap } from 'rxjs';
 
 import { IClient } from 'src/app/models/client.model';
-import { ApiService } from 'src/app/services/api.service';
+import { ClientService } from 'src/app/services/client.service';
 import { SnackBarService } from 'src/app/shared/services/snack-bar.service';
 import {
   TRAINER_OPTIONS,
@@ -40,7 +40,7 @@ export class RegisterClientComponent implements OnInit {
 
   constructor(
     private fb: FormBuilder,
-    private apiService: ApiService,
+    private clientService: ClientService,
     private snackBarService: SnackBarService,
     private activatedRoute: ActivatedRoute,
     private router: Router
@@ -101,7 +101,7 @@ export class RegisterClientComponent implements OnInit {
         filter((paramConfig) => !!Object.keys(paramConfig).length),
         switchMap((value) => {
           this.clientIdToUpdate = value['id'];
-          return this.apiService.getClientById(this.clientIdToUpdate);
+          return this.clientService.getClientById(this.clientIdToUpdate);
         })
       )
       .subscribe({
@@ -120,7 +120,7 @@ export class RegisterClientComponent implements OnInit {
   }
 
   public submitClient() {
-    this.apiService.addClient(this.registerForm.value).subscribe({
+    this.clientService.addClient(this.registerForm.value).subscribe({
       next: () => {
         this.snackBarService.openSnackBar('Registered Successfully');
         this.registerForm.reset();
@@ -130,7 +130,7 @@ export class RegisterClientComponent implements OnInit {
   }
 
   public updateClient() {
-    this.apiService
+    this.clientService
       .updateClient(this.registerForm.value, this.clientIdToUpdate)
       .subscribe({
         next: () => {

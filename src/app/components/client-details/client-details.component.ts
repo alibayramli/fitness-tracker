@@ -3,7 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 
 import { switchMap } from 'rxjs';
 import { IClient } from 'src/app/models/client.model';
-import { ApiService } from 'src/app/services/api.service';
+import { ClientService } from 'src/app/services/client.service';
 
 @Component({
   selector: 'app-client-detail',
@@ -16,7 +16,7 @@ export class ClientDetailsComponent implements OnInit {
 
   constructor(
     private activatedRoute: ActivatedRoute,
-    private apiService: ApiService
+    private clientService: ClientService
   ) {}
 
   ngOnInit(): void {
@@ -24,7 +24,7 @@ export class ClientDetailsComponent implements OnInit {
       .pipe(
         switchMap((value) => {
           this.clientId = value['id'];
-          return this.apiService.getClientById(this.clientId);
+          return this.clientService.getClientById(this.clientId);
         })
       )
       .subscribe({

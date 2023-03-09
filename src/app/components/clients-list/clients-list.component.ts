@@ -6,7 +6,7 @@ import { Router } from '@angular/router';
 
 import { filter, takeUntil, Subject } from 'rxjs';
 
-import { ApiService } from 'src/app/services/api.service';
+import { ClientService } from 'src/app/services/client.service';
 import { DialogService } from 'src/app/shared/services/dialog.service';
 import { SnackBarService } from 'src/app/shared/services/snack-bar.service';
 import { IClient } from 'src/app/models/client.model';
@@ -37,7 +37,7 @@ export class ClientsListComponent implements OnInit, OnDestroy {
   ];
 
   constructor(
-    private apiService: ApiService,
+    private clientService: ClientService,
     private router: Router,
     private dialogService: DialogService,
     private snackBarService: SnackBarService
@@ -74,7 +74,7 @@ export class ClientsListComponent implements OnInit, OnDestroy {
       )
       .subscribe({
         next: () => {
-          this.apiService
+          this.clientService
             .deleteClient(id)
             .pipe(takeUntil(this._unsubscribeAll))
             .subscribe({
@@ -88,7 +88,7 @@ export class ClientsListComponent implements OnInit, OnDestroy {
   }
 
   getClients() {
-    this.apiService
+    this.clientService
       .getClients()
       .pipe(takeUntil(this._unsubscribeAll))
       .subscribe({
