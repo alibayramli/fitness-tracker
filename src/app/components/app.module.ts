@@ -20,9 +20,7 @@ import { MatCardModule } from '@angular/material/card';
 import { MatListModule } from '@angular/material/list';
 import { MatChipsModule } from '@angular/material/chips';
 import { MatDialogModule } from '@angular/material/dialog';
-
-import { NgToastModule } from 'ng-angular-popup';
-import { NgConfirmModule } from 'ng-confirm-box';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -63,9 +61,7 @@ import { DialogComponent } from '../shared/components/dialog/dialog.component';
     MatListModule,
     MatChipsModule,
     MatDialogModule,
-
-    NgToastModule,
-    NgConfirmModule,
+    MatSnackBarModule,
 
     AppRoutingModule,
   ],
