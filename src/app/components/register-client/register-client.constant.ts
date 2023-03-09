@@ -14,3 +14,15 @@ export const IMPORTANT_GOALS = [
   'Fitness',
 ];
 export const HAVE_BEEN_IN_GYM_BEFORE = ['Yes', 'No'];
+
+export enum BMIResult {
+  UNDERWEIGHT = 'Underweight',
+  NORMAL = 'Normal',
+  OVERWEIGHT = 'Overweight',
+  OBESE = 'Obese',
+}
+
+export enum RegisterClientSnackBar {
+  REGISTER_SUCCESS = 'Registered Successfully',
+  UPDATE_SUCCESS = 'Updated Successfully',
+}

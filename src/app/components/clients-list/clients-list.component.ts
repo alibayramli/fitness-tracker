@@ -10,6 +10,11 @@ import { ClientService } from 'src/app/services/client.service';
 import { DialogService } from 'src/app/shared/services/dialog.service';
 import { SnackBarService } from 'src/app/shared/services/snack-bar.service';
 import { IClient } from 'src/app/models/client.model';
+import {
+  DISPLAYED_COLUMNS,
+  ClientsListSnackBar,
+  ClientsListDialog,
+} from './clients-list.constant';
 
 @Component({
   selector: 'app-clients-list',
@@ -19,22 +24,11 @@ import { IClient } from 'src/app/models/client.model';
 export class ClientsListComponent implements OnInit, OnDestroy {
   public dataSource!: MatTableDataSource<IClient>;
   public clients!: IClient[];
+  public readonly displayedColumns = DISPLAYED_COLUMNS;
   private _unsubscribeAll: Subject<boolean> = new Subject<boolean>();
+
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
-
-  public displayedColumns: string[] = [
-    'id',
-    'firstName',
-    'lastName',
-    'email',
-    'mobile',
-    'bmiResult',
-    'gender',
-    'package',
-    'enquiryDate',
-    'action',
-  ];
 
   constructor(
     private clientService: ClientService,
@@ -63,10 +57,12 @@ export class ClientsListComponent implements OnInit, OnDestroy {
   deleteClient(id: number) {
     this.dialogService
       .openDialog({
-        title: 'Delete client',
-        message: 'Are you sure you want to delete?',
-        confirmText: 'Yes',
-        cancelText: 'No',
+        data: {
+          title: ClientsListDialog.TITLE,
+          message: ClientsListDialog.MESSAGE,
+          confirmText: ClientsListDialog.CONFIRM_TEXT,
+          cancelText: ClientsListDialog.CANCEL_TEXT,
+        },
       })
       .pipe(
         filter((isConfirmed) => isConfirmed),
@@ -79,7 +75,9 @@ export class ClientsListComponent implements OnInit, OnDestroy {
             .pipe(takeUntil(this._unsubscribeAll))
             .subscribe({
               next: () => {
-                this.snackBarService.openSnackBar('Deleted Successfully');
+                this.snackBarService.openSnackBar(
+                  ClientsListSnackBar.DELETE_SUCCESS
+                );
                 this.getClients();
               },
             });

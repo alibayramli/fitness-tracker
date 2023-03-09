@@ -17,6 +17,8 @@ import {
   MAX_HEIGHT,
   MIN_WEIGHT,
   MAX_WEIGHT,
+  RegisterClientSnackBar,
+  BMIResult,
 } from './register-client.constant';
 
 @Component({
@@ -122,7 +124,9 @@ export class RegisterClientComponent implements OnInit {
   public submitClient() {
     this.clientService.addClient(this.registerForm.value).subscribe({
       next: () => {
-        this.snackBarService.openSnackBar('Registered Successfully');
+        this.snackBarService.openSnackBar(
+          RegisterClientSnackBar.REGISTER_SUCCESS
+        );
         this.registerForm.reset();
         this.router.navigate(['list']);
       },
@@ -134,7 +138,9 @@ export class RegisterClientComponent implements OnInit {
       .updateClient(this.registerForm.value, this.clientIdToUpdate)
       .subscribe({
         next: () => {
-          this.snackBarService.openSnackBar('Updated Successfully');
+          this.snackBarService.openSnackBar(
+            RegisterClientSnackBar.UPDATE_SUCCESS
+          );
           this.registerForm.reset();
           this.router.navigate(['list']);
         },
@@ -167,16 +173,20 @@ export class RegisterClientComponent implements OnInit {
 
     switch (true) {
       case BMI < 18.5:
-        this.registerForm.controls['bmiResult'].patchValue('Underweight');
+        this.registerForm.controls['bmiResult'].patchValue(
+          BMIResult.UNDERWEIGHT
+        );
         break;
       case BMI >= 18.5 && BMI < 25:
-        this.registerForm.controls['bmiResult'].patchValue('Normal');
+        this.registerForm.controls['bmiResult'].patchValue(BMIResult.NORMAL);
         break;
       case BMI >= 25 && BMI < 30:
-        this.registerForm.controls['bmiResult'].patchValue('Overweight');
+        this.registerForm.controls['bmiResult'].patchValue(
+          BMIResult.OVERWEIGHT
+        );
         break;
       default:
-        this.registerForm.controls['bmiResult'].patchValue('Obese');
+        this.registerForm.controls['bmiResult'].patchValue(BMIResult.OBESE);
         break;
     }
   }
