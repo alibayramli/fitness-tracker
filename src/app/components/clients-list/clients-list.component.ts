@@ -1,10 +1,10 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, OnDestroy, ViewChild } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
 
-import { filter } from 'rxjs';
+import { filter, takeUntil, Subject } from 'rxjs';
 import { NgToastService } from 'ng-angular-popup';
 
 import { ApiService } from 'src/app/services/api.service';
@@ -16,9 +16,10 @@ import { IClient } from 'src/app/models/client.model';
   templateUrl: './clients-list.component.html',
   styleUrls: ['./clients-list.component.scss'],
 })
-export class ClientsListComponent implements OnInit {
+export class ClientsListComponent implements OnInit, OnDestroy {
   public dataSource!: MatTableDataSource<IClient>;
   public clients!: IClient[];
+  private _unsubscribeAll: Subject<boolean> = new Subject<boolean>();
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
 
@@ -67,38 +68,52 @@ export class ClientsListComponent implements OnInit {
         confirmText: 'Yes',
         cancelText: 'No',
       })
-      .pipe(filter((isConfirmed) => isConfirmed))
+      .pipe(
+        filter((isConfirmed) => isConfirmed),
+        takeUntil(this._unsubscribeAll)
+      )
       .subscribe({
         next: () => {
-          this.apiService.deleteClient(id).subscribe({
-            next: () => {
-              this.toastService.success({
-                detail: 'SUCCESS',
-                summary: 'Deleted Successfully',
-                duration: 3000,
-              });
-              this.getClients();
-            },
-            error: () => {
-              this.toastService.error({
-                detail: 'ERROR',
-                summary: 'An error occured during deletion',
-                duration: 3000,
-              });
-            },
-          });
+          this.apiService
+            .deleteClient(id)
+            .pipe(takeUntil(this._unsubscribeAll))
+            .subscribe({
+              next: () => {
+                this.toastService.success({
+                  detail: 'SUCCESS',
+                  summary: 'Deleted Successfully',
+                  duration: 3000,
+                });
+                this.getClients();
+              },
+              error: () => {
+                this.toastService.error({
+                  detail: 'ERROR',
+                  summary: 'An error occured during deletion',
+                  duration: 3000,
+                });
+              },
+            });
         },
       });
   }
 
   getClients() {
-    this.apiService.getClients().subscribe({
-      next: (clients) => {
-        this.clients = clients;
-        this.dataSource = new MatTableDataSource(this.clients);
-        this.dataSource.paginator = this.paginator;
-        this.dataSource.sort = this.sort;
-      },
-    });
+    this.apiService
+      .getClients()
+      .pipe(takeUntil(this._unsubscribeAll))
+      .subscribe({
+        next: (clients) => {
+          this.clients = clients;
+          this.dataSource = new MatTableDataSource(this.clients);
+          this.dataSource.paginator = this.paginator;
+          this.dataSource.sort = this.sort;
+        },
+      });
+  }
+
+  ngOnDestroy(): void {
+    this._unsubscribeAll.next(true);
+    this._unsubscribeAll.unsubscribe();
   }
 }
