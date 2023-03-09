@@ -19,6 +19,7 @@ import { MatSortModule } from '@angular/material/sort';
 import { MatCardModule } from '@angular/material/card';
 import { MatListModule } from '@angular/material/list';
 import { MatChipsModule } from '@angular/material/chips';
+import { MatDialogModule } from '@angular/material/dialog';
 
 import { NgToastModule } from 'ng-angular-popup';
 import { NgConfirmModule } from 'ng-confirm-box';
@@ -29,6 +30,7 @@ import { RegisterClientComponent } from './register-client/register-client.compo
 import { ClientsListComponent } from './clients-list/clients-list.component';
 import { ClientDetailsComponent } from './client-details/client-details.component';
 import { NavbarComponent } from './navbar/navbar.component';
+import { DialogComponent } from '../shared/components/dialog/dialog.component';
 
 @NgModule({
   declarations: [
@@ -37,6 +39,7 @@ import { NavbarComponent } from './navbar/navbar.component';
     ClientsListComponent,
     ClientDetailsComponent,
     NavbarComponent,
+    DialogComponent,
   ],
   imports: [
     BrowserModule,
@@ -59,6 +62,7 @@ import { NavbarComponent } from './navbar/navbar.component';
     MatCardModule,
     MatListModule,
     MatChipsModule,
+    MatDialogModule,
 
     NgToastModule,
     NgConfirmModule,

@@ -4,10 +4,11 @@ import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
 
+import { filter } from 'rxjs';
 import { NgToastService } from 'ng-angular-popup';
-import { NgConfirmService } from 'ng-confirm-box';
 
 import { ApiService } from 'src/app/services/api.service';
+import { DialogService } from 'src/app/shared/services/dialog.service';
 import { IClient } from 'src/app/models/client.model';
 
 @Component({
@@ -37,8 +38,8 @@ export class ClientsListComponent implements OnInit {
   constructor(
     private apiService: ApiService,
     private router: Router,
-    private confirmService: NgConfirmService,
-    private toastService: NgToastService
+    private toastService: NgToastService,
+    private dialogService: DialogService
   ) {}
 
   ngOnInit(): void {
@@ -59,29 +60,35 @@ export class ClientsListComponent implements OnInit {
   }
 
   deleteClient(id: number) {
-    this.confirmService.showConfirm(
-      'Are you sure you want to delete?',
-      () => {
-        this.apiService.deleteClient(id).subscribe({
-          next: () => {
-            this.toastService.success({
-              detail: 'SUCCESS',
-              summary: 'Deleted Successfully',
-              duration: 3000,
-            });
-            this.getClients();
-          },
-          error: () => {
-            this.toastService.error({
-              detail: 'ERROR',
-              summary: 'An error occured during deletion',
-              duration: 3000,
-            });
-          },
-        });
-      },
-      () => {}
-    );
+    this.dialogService
+      .openDialog({
+        title: 'Delete client',
+        message: 'Are you sure you want to delete?',
+        confirmText: 'Yes',
+        cancelText: 'No',
+      })
+      .pipe(filter((isConfirmed) => isConfirmed))
+      .subscribe({
+        next: () => {
+          this.apiService.deleteClient(id).subscribe({
+            next: () => {
+              this.toastService.success({
+                detail: 'SUCCESS',
+                summary: 'Deleted Successfully',
+                duration: 3000,
+              });
+              this.getClients();
+            },
+            error: () => {
+              this.toastService.error({
+                detail: 'ERROR',
+                summary: 'An error occured during deletion',
+                duration: 3000,
+              });
+            },
+          });
+        },
+      });
   }
 
   getClients() {
