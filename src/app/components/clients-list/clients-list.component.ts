@@ -5,10 +5,10 @@ import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
 
 import { filter, takeUntil, Subject } from 'rxjs';
-import { NgToastService } from 'ng-angular-popup';
 
 import { ApiService } from 'src/app/services/api.service';
 import { DialogService } from 'src/app/shared/services/dialog.service';
+import { SnackBarService } from 'src/app/shared/services/snack-bar.service';
 import { IClient } from 'src/app/models/client.model';
 
 @Component({
@@ -39,8 +39,8 @@ export class ClientsListComponent implements OnInit, OnDestroy {
   constructor(
     private apiService: ApiService,
     private router: Router,
-    private toastService: NgToastService,
-    private dialogService: DialogService
+    private dialogService: DialogService,
+    private snackBarService: SnackBarService
   ) {}
 
   ngOnInit(): void {
@@ -79,19 +79,8 @@ export class ClientsListComponent implements OnInit, OnDestroy {
             .pipe(takeUntil(this._unsubscribeAll))
             .subscribe({
               next: () => {
-                this.toastService.success({
-                  detail: 'SUCCESS',
-                  summary: 'Deleted Successfully',
-                  duration: 3000,
-                });
+                this.snackBarService.openSnackBar('Deleted Successfully');
                 this.getClients();
-              },
-              error: () => {
-                this.toastService.error({
-                  detail: 'ERROR',
-                  summary: 'An error occured during deletion',
-                  duration: 3000,
-                });
               },
             });
         },

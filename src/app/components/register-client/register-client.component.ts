@@ -2,11 +2,11 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 
-import { NgToastService } from 'ng-angular-popup';
 import { combineLatest, filter, switchMap, tap } from 'rxjs';
 
 import { IClient } from 'src/app/models/client.model';
 import { ApiService } from 'src/app/services/api.service';
+import { SnackBarService } from 'src/app/shared/services/snack-bar.service';
 import {
   TRAINER_OPTIONS,
   GENDERS,
@@ -41,7 +41,7 @@ export class RegisterClientComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     private apiService: ApiService,
-    private toastService: NgToastService,
+    private snackBarService: SnackBarService,
     private activatedRoute: ActivatedRoute,
     private router: Router
   ) {}
@@ -122,12 +122,7 @@ export class RegisterClientComponent implements OnInit {
   public submitClient() {
     this.apiService.addClient(this.registerForm.value).subscribe({
       next: () => {
-        this.toastService.success({
-          detail: 'Success',
-          summary: 'Enquiry Added',
-          duration: 3000,
-        });
-
+        this.snackBarService.openSnackBar('Registered Successfully');
         this.registerForm.reset();
         this.router.navigate(['list']);
       },
@@ -139,12 +134,7 @@ export class RegisterClientComponent implements OnInit {
       .updateClient(this.registerForm.value, this.clientIdToUpdate)
       .subscribe({
         next: () => {
-          this.toastService.success({
-            detail: 'Success',
-            summary: 'Enquiry Updated',
-            duration: 3000,
-          });
-
+          this.snackBarService.openSnackBar('Updated Successfully');
           this.registerForm.reset();
           this.router.navigate(['list']);
         },
