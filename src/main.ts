@@ -3,6 +3,7 @@ import { bootstrapApplication } from '@angular/platform-browser';
 import { provideHttpClient, withInterceptors } from '@angular/common/http';
 import { ReactiveFormsModule } from '@angular/forms';
 import { provideAnimations } from '@angular/platform-browser/animations';
+import { provideRouter } from '@angular/router';
 
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatDialogModule } from '@angular/material/dialog';
@@ -23,7 +24,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatToolbarModule } from '@angular/material/toolbar';
 
 import { AppComponent } from './app/components/app.component';
-import { AppRoutingModule } from './app/components/app-routing.module';
+import { APP_ROUTES } from './app/components/app.routes';
 
 bootstrapApplication(AppComponent, {
   providers: [
@@ -45,10 +46,10 @@ bootstrapApplication(AppComponent, {
       MatListModule,
       MatChipsModule,
       MatDialogModule,
-      MatSnackBarModule,
-      AppRoutingModule
+      MatSnackBarModule
     ),
     provideAnimations(),
+    provideRouter(APP_ROUTES),
     provideHttpClient(withInterceptors([])),
   ],
 }).catch((err) => console.error(err));

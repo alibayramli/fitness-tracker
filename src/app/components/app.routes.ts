@@ -1,10 +1,9 @@
-import { NgModule } from '@angular/core';
-import { RouterModule, Routes } from '@angular/router';
+import { Routes } from '@angular/router';
 import { ClientDetailsComponent } from './client-details/client-details.component';
 import { RegisterClientComponent } from './register-client/register-client.component';
 import { ClientsListComponent } from './clients-list/clients-list.component';
 
-const routes: Routes = [
+export const APP_ROUTES: Routes = [
   {
     path: '',
     redirectTo: 'register',
@@ -28,9 +27,3 @@ const routes: Routes = [
     component: RegisterClientComponent,
   },
 ];
-
-@NgModule({
-  imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule],
-})
-export class AppRoutingModule {}
