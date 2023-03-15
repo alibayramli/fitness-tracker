@@ -1,10 +1,37 @@
 <mat-toolbar color="primary">
-  <h1 routerLink="/" class="app-name">Client Registration</h1>
+  <h1 routerLink="/" class="app-name">
+    {{ "clientRegistration" | transloco }}
+  </h1>
   <span class="example-spacer"></span>
 
   <button mat-raised-button color="accent" routerLink="/list">
     View Enquiries
   </button>
+
+  <!-- Button -->
+  <button mat-icon-button [matMenuTriggerFor]="languages">
+    <ng-container
+      *ngTemplateOutlet="flagImage; context: { $implicit: selectedLanguage }"
+    ></ng-container>
+  </button>
+
+  <!-- Flag image template -->
+  <ng-template let-selectedLang #flagImage>
+    <img
+      [src]="'assets/images/flags/' + selectedLang + '.svg'"
+      [alt]="'Flag image for ' + selectedLang"
+      class="flag-icon"
+    />
+  </ng-template>
+
+  <!-- Language menu -->
+  <mat-menu xPosition="before" #languages>
+    <ng-container *ngFor="let language of availableLanguages">
+      <button mat-menu-item (click)="changeLanguage(language)">
+        {{ language }}
+      </button>
+    </ng-container>
+  </mat-menu>
 
   <button
     mat-icon-button
