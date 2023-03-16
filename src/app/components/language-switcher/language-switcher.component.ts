@@ -5,7 +5,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatMenuModule } from '@angular/material/menu';
 import { AVAILABLE_LANGUAGES } from 'src/app/shared/constants/languages.contant';
 import { TranslocoService } from '@ngneat/transloco';
-import { FlagSrcPipe } from 'src/app/pipes/lang-asset.pipe';
+import { FlagSrcPipe } from 'src/app/pipes/flag-src.pipe';
 
 @Component({
   selector: 'app-language-switcher',

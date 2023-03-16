@@ -9,9 +9,9 @@ import { FileTitle, AvailableLanguages } from '../shared/models/language.model';
 export class FlagSrcPipe implements PipeTransform {
   constructor(private sanitizer: DomSanitizer) {}
 
-  transform(lang: AvailableLanguages): SafeUrl {
+  transform(language: AvailableLanguages): SafeUrl {
     const basePath = 'assets/images/flags/';
-    const imageUrl = `${basePath}${FileTitle[lang]}.svg`;
+    const imageUrl = `${basePath}${FileTitle[language]}.svg`;
     return this.sanitizer.bypassSecurityTrustUrl(imageUrl);
   }
 }

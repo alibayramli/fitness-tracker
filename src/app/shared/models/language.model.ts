@@ -5,7 +5,7 @@ export enum AvailableLanguages {
 }
 
 export const FileTitle = {
-  English: 'en',
-  French: 'fr',
-  Azerbaijani: 'az',
+  [AvailableLanguages.ENGLISH]: 'en',
+  [AvailableLanguages.FRENCH]: 'fr',
+  [AvailableLanguages.AZERBAIJANI]: 'az',
 };
