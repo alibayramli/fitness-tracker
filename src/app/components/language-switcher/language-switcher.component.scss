@@ -1,0 +1,13 @@
+.flag-icon {
+  margin-bottom: 0.7rem;
+}
+
+.menu-container {
+  & > ::ng-deep {
+    span {
+      display: flex;
+      align-items: center;
+      pointer-events: none;
+    }
+  }
+}

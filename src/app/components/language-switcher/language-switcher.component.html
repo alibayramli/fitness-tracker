@@ -1,0 +1,28 @@
+<button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Languages menu">
+  <ng-container
+    *ngTemplateOutlet="flagImage; context: { $implicit: selectedLanguage }"
+  ></ng-container>
+</button>
+<mat-menu #menu="matMenu" xPosition="before">
+  <button
+    mat-menu-item
+    *ngFor="let language of availableLanguages"
+    (click)="changeLanguage(language)"
+    class="menu-container"
+  >
+    <button mat-icon-button>
+      <ng-container
+        *ngTemplateOutlet="flagImage; context: { $implicit: language }"
+      ></ng-container>
+    </button>
+    <span>{{ language }}</span>
+  </button>
+</mat-menu>
+
+<ng-template let-lang #flagImage>
+  <img
+    [src]="lang | flagSrc"
+    [alt]="'Flag image for ' + lang"
+    class="flag-icon"
+  />
+</ng-template>
