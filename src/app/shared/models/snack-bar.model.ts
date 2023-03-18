@@ -1,8 +1,7 @@
 import { MatSnackBarConfig } from '@angular/material/snack-bar';
 
-export interface ISnackBar {}
 export class SnackBarConfig {
-  public static getDefaultConfig(): MatSnackBarConfig<ISnackBar> {
+  public static getDefaultConfig(): MatSnackBarConfig {
     return {
       duration: 2000,
       horizontalPosition: 'right',
