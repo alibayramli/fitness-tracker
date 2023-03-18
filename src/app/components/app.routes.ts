@@ -9,7 +9,6 @@ export const APP_ROUTES: Routes = [
     redirectTo: 'register',
     pathMatch: 'full',
   },
-
   {
     path: 'register',
     component: RegisterClientComponent,

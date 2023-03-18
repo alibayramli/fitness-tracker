@@ -39,16 +39,16 @@ import {
   styleUrls: ['./register-client.component.scss'],
   standalone: true,
   imports: [
+    NgFor,
+    NgIf,
     ReactiveFormsModule,
     MatFormFieldModule,
     MatInputModule,
     MatIconModule,
     MatRadioModule,
-    NgFor,
     MatSelectModule,
     MatOptionModule,
     MatDatepickerModule,
-    NgIf,
     MatButtonModule,
   ],
 })

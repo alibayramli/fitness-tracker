@@ -16,11 +16,11 @@ import { IClient } from 'src/app/models/client.model';
   standalone: true,
   imports: [
     NgIf,
+    NgFor,
     MatCardModule,
     MatListModule,
     MatButtonModule,
     MatChipsModule,
-    NgFor,
   ],
 })
 export class ClientDetailsComponent implements OnInit {
