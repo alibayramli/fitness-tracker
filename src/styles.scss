@@ -5,11 +5,12 @@
 @tailwind components;
 @tailwind utilities;
 
-html,
-body {
-  height: 100%;
-}
-body {
+*,
+::before,
+::after {
   margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  border-style: none;
   font-family: Roboto, "Helvetica Neue", sans-serif;
 }
