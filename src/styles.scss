@@ -1,6 +1,10 @@
 @use "./themes/dark.scss";
 @use "./themes/light.scss";
 
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
 html,
 body {
   height: 100%;
