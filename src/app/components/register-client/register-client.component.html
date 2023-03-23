@@ -7,7 +7,7 @@
   />
 
   <form [formGroup]="registerForm">
-    <div class="grid grid-cols-2 gap-4">
+    <div class="grid sm:grid-cols-1 md:grid-cols-2 gap-4">
       <mat-form-field appearance="outline">
         <mat-label>First name</mat-label>
         <input formControlName="firstName" matInput placeholder="First name" />
@@ -21,15 +21,18 @@
       </mat-form-field>
 
       <mat-form-field appearance="outline">
-        <mat-label>Email</mat-label>
-        <input formControlName="email" matInput placeholder="Email" />
-        <mat-icon matSuffix>mail</mat-icon>
+        <mat-label>Gender</mat-label>
+        <mat-select formControlName="gender">
+          <mat-option *ngFor="let gender of genders" [value]="gender">
+            {{ gender }}
+          </mat-option>
+        </mat-select>
       </mat-form-field>
 
       <mat-form-field appearance="outline">
-        <mat-label>Mobile number</mat-label>
-        <input formControlName="mobile" matInput placeholder="Mobile number" />
-        <mat-icon matSuffix>call</mat-icon>
+        <mat-label>Email</mat-label>
+        <input formControlName="email" matInput placeholder="Email" />
+        <mat-icon matSuffix>mail</mat-icon>
       </mat-form-field>
 
       <mat-form-field appearance="outline">
@@ -101,6 +104,33 @@
       </mat-form-field>
 
       <mat-form-field appearance="outline">
+        <mat-label>Have been in Gym before?</mat-label>
+        <mat-select formControlName="haveBeenInGymBefore">
+          <mat-option
+            *ngFor="let option of haveBeenInGymBefore"
+            [value]="option"
+          >
+            {{ option }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Do you require trainer?</mat-label>
+        <mat-select formControlName="haveBeenInGymBefore">
+          <mat-option *ngFor="let option of trainerOptions" [value]="option">
+            {{ option }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Mobile number</mat-label>
+        <input formControlName="mobile" matInput placeholder="Mobile number" />
+        <mat-icon matSuffix>call</mat-icon>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
         <mat-label>Enquiry date</mat-label>
         <input
           formControlName="enquiryDate"
@@ -114,48 +144,8 @@
         ></mat-datepicker-toggle>
         <mat-datepicker #picker></mat-datepicker>
       </mat-form-field>
-      <div></div>
-
-      <div class="flex flex-col gap-3">
-        <div class="flex justify-between">
-          <label id="example-radio-group-label">Have been in Gym before?</label>
-          <mat-radio-group
-            formControlName="haveBeenInGymBefore"
-            class="flex flex-row"
-          >
-            <mat-radio-button
-              *ngFor="let option of haveBeenInGymBefore"
-              [value]="option"
-            >
-              {{ option }}
-            </mat-radio-button>
-          </mat-radio-group>
-        </div>
-
-        <div class="flex justify-between">
-          <label id="example-radio-group-label">Do you require trainer?</label>
-          <mat-radio-group formControlName="requireTrainer">
-            <mat-radio-button
-              *ngFor="let trainerOption of trainerOptions"
-              [value]="trainerOption"
-            >
-              {{ trainerOption }}
-            </mat-radio-button>
-          </mat-radio-group>
-        </div>
-
-        <div class="flex justify-between">
-          <label id="example-radio-group-label">Gender</label>
-          <mat-radio-group formControlName="gender">
-            <mat-radio-button *ngFor="let gender of genders" [value]="gender">
-              {{ gender }}
-            </mat-radio-button>
-          </mat-radio-group>
-        </div>
-      </div>
     </div>
 
-    <div class="grid grid-cols-2 gap-4"></div>
     <button
       *ngIf="!isUpdateActive"
       (click)="submitClient()"
