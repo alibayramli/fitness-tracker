@@ -2,12 +2,12 @@ export const DISPLAYED_COLUMNS = [
   'id',
   'firstName',
   'lastName',
-  'email',
-  'mobile',
+  // 'email',
+  // 'mobile',
   'bmiResult',
-  'gender',
-  'package',
-  'enquiryDate',
+  // 'gender',
+  // 'package',
+  // 'enquiryDate',
   'action',
 ];
 
