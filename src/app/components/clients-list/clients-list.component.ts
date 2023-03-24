@@ -8,6 +8,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
+import { TranslocoModule } from '@ngneat/transloco';
 import { filter, takeUntil, Subject } from 'rxjs';
 import { ClientService } from 'src/app/services/client.service';
 import { DialogService } from 'src/app/shared/services/dialog.service';
@@ -25,15 +26,16 @@ import {
   styleUrls: ['./clients-list.component.scss'],
   standalone: true,
   imports: [
-    MatButtonModule,
+    DatePipe,
     RouterLink,
+    MatButtonModule,
     MatFormFieldModule,
     MatInputModule,
     MatTableModule,
     MatSortModule,
     MatPaginatorModule,
     MatIconModule,
-    DatePipe,
+    TranslocoModule,
   ],
 })
 export class ClientsListComponent implements OnInit, OnDestroy {

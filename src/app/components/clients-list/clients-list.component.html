@@ -1,6 +1,6 @@
-<div class="flex justify-between m-4">
+<div class="flex justify-between m-4" *transloco="let t">
   <button routerLink="/register" mat-raised-button color="accent">
-    <mat-icon matSuffix>arrow_back</mat-icon>Back to Registration
+    <mat-icon matSuffix>arrow_back</mat-icon> {{ t("backToRegistration") }}
   </button>
   <mat-form-field appearance="outline">
     <mat-label>Filter</mat-label>

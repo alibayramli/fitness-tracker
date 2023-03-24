@@ -1,4 +1,6 @@
 {
   "hello": "Salam",
-  "clientRegistration": "Müştəri Qeydiyyatı"
+  "clientRegistration": "Müştəri qeydiyyatı",
+  "inquiries": "Sorğular",
+  "backToRegistration": "Qeydiyyat səhifəsinə qayıt"
 }

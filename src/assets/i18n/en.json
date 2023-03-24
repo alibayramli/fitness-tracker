@@ -1,4 +1,6 @@
 {
   "hello": "Hello",
-  "clientRegistration": "Client registration"
+  "clientRegistration": "Client registration",
+  "inquiries": "Inquiries",
+  "backToRegistration": "Back to registration"
 }

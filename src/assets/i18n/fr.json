@@ -1,4 +1,6 @@
 {
   "hello": "Bonjour",
-  "clientRegistration": "Enregistrement des Clients"
+  "clientRegistration": "Enregistrement des clients",
+  "inquiries": "Enquêtes",
+  "backToRegistration": "Retour à l'inscription"
 }
