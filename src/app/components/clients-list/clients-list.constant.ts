@@ -5,7 +5,7 @@ export const DISPLAYED_COLUMNS = [
   // 'email',
   // 'mobile',
   'bmiResult',
-  // 'gender',
+  'gender',
   // 'package',
   // 'enquiryDate',
   'action',
