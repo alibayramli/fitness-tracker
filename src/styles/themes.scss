@@ -4,9 +4,9 @@
 $my-dark-theme: mat.define-dark-theme(
   (
     color: (
-      primary: mat.define-palette(mat.$grey-palette, 600),
+      primary: mat.define-palette(mat.$indigo-palette, 500),
       accent: mat.define-palette(mat.$amber-palette),
-      warn: mat.define-palette(mat.$deep-orange-palette),
+      warn: mat.define-palette(mat.$red-palette),
     ),
     typography: mat.define-typography-config(),
     density: 0,

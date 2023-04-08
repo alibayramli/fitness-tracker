@@ -1,0 +1,12 @@
+<mat-toolbar color="primary" *transloco="let t">
+  <h1 routerLink="/" class="hover:cursor-pointer">
+    {{ t("clientRegistration") }}
+  </h1>
+  <app-switcher-theme></app-switcher-theme>
+  <span class="flex-1"></span>
+  <app-auth-user-profile class="mt-2"></app-auth-user-profile>
+  <app-switcher-language></app-switcher-language>
+  <button mat-raised-button color="accent" routerLink="/client-lists">
+    {{ t("inquiries") }}
+  </button>
+</mat-toolbar>

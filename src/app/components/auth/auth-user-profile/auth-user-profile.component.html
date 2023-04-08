@@ -1,0 +1,25 @@
+<button mat-icon-button [matMenuTriggerFor]="userActions">
+  <mat-icon matSuffix>person</mat-icon>
+</button>
+<mat-menu [xPosition]="'before'" #userActions="matMenu">
+  <button mat-menu-item>
+    <span class="flex flex-col leading-none">
+      <span>Signed in as</span>
+      <span class="mt-1.5 text-md font-medium">{{ user.email }}</span>
+    </span>
+  </button>
+  <mat-divider class="my-2"></mat-divider>
+  <button mat-menu-item [routerLink]="['/auth-login']">
+    <mat-icon matSuffix>person</mat-icon>
+    <span>Log in</span>
+  </button>
+  <button mat-menu-item [routerLink]="['/auth-register']">
+    <mat-icon matSuffix>person</mat-icon>
+    <span>Register</span>
+  </button>
+  <mat-divider class="my-2"></mat-divider>
+  <button mat-menu-item (click)="logOut()">
+    <mat-icon matSuffix>remove_red_eye</mat-icon>
+    <span>Log out</span>
+  </button>
+</mat-menu>

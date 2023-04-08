@@ -4,6 +4,7 @@ import { provideHttpClient, withInterceptors } from '@angular/common/http';
 import { ReactiveFormsModule } from '@angular/forms';
 import { provideAnimations } from '@angular/platform-browser/animations';
 import { provideRouter } from '@angular/router';
+import { AngularFireModule } from '@angular/fire/compat';
 
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatDialogModule } from '@angular/material/dialog';
@@ -30,6 +31,7 @@ import {
   AVAILABLE_LANGUAGES,
   DEFAULT_LANGUGE,
 } from './app/shared/constants/languages.contant';
+import { environment } from './environments/environment';
 
 bootstrapApplication(AppComponent, {
   providers: [
@@ -51,7 +53,8 @@ bootstrapApplication(AppComponent, {
       MatListModule,
       MatChipsModule,
       MatDialogModule,
-      MatSnackBarModule
+      MatSnackBarModule,
+      AngularFireModule.initializeApp(environment.firebaseConfig)
     ),
     provideAnimations(),
     provideRouter(APP_ROUTES),
