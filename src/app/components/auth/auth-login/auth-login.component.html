@@ -1,96 +1,100 @@
-<div class="flex flex-col flex-auto items-center sm:justify-center min-w-0">
+<div
+  class="fixed inset-0 flex items-center justify-center"
+  *ngIf="isSpinnerActive$ | async; else formLogin"
+>
+  <mat-spinner diameter="50" color="accent"></mat-spinner>
+</div>
+<ng-template #formLogin>
   <div
-    class="w-full sm:w-auto py-8 px-4 sm:p-12 sm:rounded-2xl sm:shadow sm:bg-card"
+    class="flex flex-col flex-auto items-center sm:justify-center min-w-0 my-16"
   >
-    <div class="w-full max-w-80 sm:w-80 mx-auto sm:mx-0">
-      <!-- Logo -->
-      <div class="w-12">
-        <img src="assets/images/auth-logo.svg" />
-      </div>
+    <div
+      class="w-full sm:w-auto py-8 px-4 sm:p-12 sm:rounded-2xl sm:shadow sm:bg-card"
+    >
+      <div class="w-full max-w-80 sm:w-80 mx-auto sm:mx-0">
+        <div class="w-12">
+          <img src="assets/images/auth-logo.svg" />
+        </div>
 
-      <!-- Title -->
-      <div class="mt-8 text-4xl font-extrabold tracking-tight leading-tight">
-        Login
-      </div>
-      <div class="flex items-baseline mt-0.5 font-medium">
-        <div>Don't have an account?</div>
-        <a
-          class="ml-1 text-primary-500 hover:underline"
-          [routerLink]="['/auth-register']"
-          >Register
-        </a>
-      </div>
-
-      <form class="mt-8" [formGroup]="loginForm" (ngSubmit)="login()">
-        <!-- Email field -->
-        <mat-form-field class="w-full">
-          <mat-label>Email address</mat-label>
-          <input id="email" matInput formControlName="email" />
-          <mat-error *ngIf="loginForm.get('email')?.hasError('required')">
-            Email address is required
-          </mat-error>
-          <mat-error *ngIf="loginForm.get('email')?.hasError('email')">
-            Please enter a valid email address
-          </mat-error>
-        </mat-form-field>
-
-        <!-- Password field -->
-        <mat-form-field class="w-full">
-          <mat-label>Password</mat-label>
-          <input
-            id="password"
-            matInput
-            type="password"
-            formControlName="password"
-            #passwordField
-          />
-          <button
-            mat-icon-button
-            type="button"
-            (click)="
-              passwordField.type === 'password'
-                ? (passwordField.type = 'text')
-                : (passwordField.type = 'password')
-            "
-            matSuffix
-          >
-            <mat-icon matSuffix *ngIf="passwordField.type === 'password'"
-              >visibility</mat-icon
-            >
-            <mat-icon matSuffix *ngIf="passwordField.type !== 'password'"
-              >visibility_off</mat-icon
-            >
-          </button>
-          <mat-error> Password is required </mat-error>
-        </mat-form-field>
-
-        <!-- Actions -->
-        <div class="inline-flex items-center justify-between w-full mt-1.5">
-          <mat-checkbox
-            class="-ml-2"
-            [color]="'primary'"
-            formControlName="rememberMe"
-          >
-            Remember me
-          </mat-checkbox>
+        <div class="mt-8 text-4xl font-extrabold tracking-tight leading-tight">
+          Login
+        </div>
+        <div class="flex items-baseline mt-0.5 font-medium">
+          <div>Don't have an account?</div>
           <a
-            class="text-md font-medium text-primary-500 hover:underline"
-            [routerLink]="['/auth-forgot-password']"
-            >Forgot password?
+            class="ml-1 text-primary-500 hover:underline"
+            [routerLink]="['/auth-register']"
+            >Register
           </a>
         </div>
 
-        <!-- Submit button -->
-        <button
-          class="fuse-mat-button-large w-full mt-6"
-          mat-flat-button
-          [color]="'primary'"
-          [disabled]="loginForm.disabled"
-          type="submit"
-        >
-          <span *ngIf="!loginForm.disabled"> Login </span>
-        </button>
-      </form>
+        <form class="mt-8" [formGroup]="loginForm" (ngSubmit)="login()">
+          <mat-form-field class="w-full">
+            <mat-label>Email address</mat-label>
+            <input id="email" matInput formControlName="email" />
+            <mat-error *ngIf="loginForm.get('email')?.hasError('required')">
+              Email address is required
+            </mat-error>
+            <mat-error *ngIf="loginForm.get('email')?.hasError('email')">
+              Please enter a valid email address
+            </mat-error>
+          </mat-form-field>
+
+          <mat-form-field class="w-full">
+            <mat-label>Password</mat-label>
+            <input
+              id="password"
+              matInput
+              type="password"
+              formControlName="password"
+              #passwordField
+            />
+            <button
+              mat-icon-button
+              type="button"
+              (click)="
+                passwordField.type === 'password'
+                  ? (passwordField.type = 'text')
+                  : (passwordField.type = 'password')
+              "
+              matSuffix
+            >
+              <mat-icon matSuffix *ngIf="passwordField.type === 'password'"
+                >visibility</mat-icon
+              >
+              <mat-icon matSuffix *ngIf="passwordField.type !== 'password'"
+                >visibility_off</mat-icon
+              >
+            </button>
+            <mat-error> Password is required </mat-error>
+          </mat-form-field>
+
+          <div class="inline-flex items-center justify-between w-full mt-1.5">
+            <mat-checkbox
+              class="-ml-2"
+              [color]="'primary'"
+              formControlName="rememberMe"
+            >
+              Remember me
+            </mat-checkbox>
+            <a
+              class="text-md font-medium text-primary-500 hover:underline"
+              [routerLink]="['/auth-forgot-password']"
+              >Forgot password?
+            </a>
+          </div>
+
+          <button
+            class="fuse-mat-button-large w-full mt-6"
+            mat-flat-button
+            [color]="'primary'"
+            [disabled]="loginForm.disabled"
+            type="submit"
+          >
+            <span *ngIf="!loginForm.disabled"> Login </span>
+          </button>
+        </form>
+      </div>
     </div>
   </div>
-</div>
+</ng-template>

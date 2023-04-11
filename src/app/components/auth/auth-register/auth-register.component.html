@@ -1,119 +1,128 @@
-<div class="flex flex-col flex-auto items-center sm:justify-center min-w-0">
+<div
+  class="fixed inset-0 flex items-center justify-center"
+  *ngIf="isSpinnerActive$ | async; else registrationForm"
+>
+  <mat-spinner diameter="50" color="accent"></mat-spinner>
+</div>
+
+<ng-template #registrationForm>
   <div
-    class="w-full sm:w-auto py-8 px-4 sm:p-12 sm:rounded-2xl sm:shadow sm:bg-card"
+    class="flex flex-col flex-auto items-center sm:justify-center min-w-0 my-16"
   >
-    <div class="w-full max-w-80 sm:w-80 mx-auto sm:mx-0">
-      <!-- Logo -->
-      <div class="w-12">
-        <img src="assets/images/auth-logo.svg" alt="Auth logo" />
-      </div>
+    <div
+      class="w-full sm:w-auto py-8 px-4 sm:p-12 sm:rounded-2xl sm:shadow sm:bg-card"
+    >
+      <div class="w-full max-w-80 sm:w-80 mx-auto sm:mx-0">
+        <div class="w-12">
+          <img src="assets/images/auth-logo.svg" alt="Auth logo" />
+        </div>
 
-      <!-- Title -->
-      <div class="mt-8 text-4xl font-extrabold tracking-tight leading-tight">
-        Register
-      </div>
-      <div class="flex items-baseline mt-0.5 font-medium">
-        <div>Already have an account?</div>
-        <a
-          class="ml-1 text-primary-500 hover:underline"
-          [routerLink]="['/auth-login']"
-          >Login
-        </a>
-      </div>
+        <div class="mt-8 text-4xl font-extrabold tracking-tight leading-tight">
+          Register
+        </div>
+        <div class="flex items-baseline mt-0.5 font-medium">
+          <div>Already have an account?</div>
+          <a
+            class="ml-1 text-primary-500 hover:underline"
+            [routerLink]="['/auth-login']"
+            >Login
+          </a>
+        </div>
 
-      <form class="mt-8" [formGroup]="registerForm" (ngSubmit)="register()">
-        <!-- Name field -->
-        <mat-form-field class="w-full">
-          <mat-label>Full name</mat-label>
-          <input id="name" matInput formControlName="name" />
-          <mat-error *ngIf="registerForm.get('name')?.hasError('required')">
-            Full name is required
-          </mat-error>
-        </mat-form-field>
+        <form class="mt-8" [formGroup]="registerForm" (ngSubmit)="register()">
+          <mat-form-field class="w-full">
+            <mat-label>Full name</mat-label>
+            <input id="name" matInput formControlName="name" />
+            <mat-error *ngIf="registerForm.get('name')?.hasError('required')">
+              Full name is required
+            </mat-error>
+          </mat-form-field>
 
-        <!-- Email field -->
-        <mat-form-field class="w-full">
-          <mat-label>Email address</mat-label>
-          <input id="email" matInput formControlName="email" />
-          <mat-error *ngIf="registerForm.get('email')?.hasError('required')">
-            Email address is required
-          </mat-error>
-          <mat-error *ngIf="registerForm.get('email')?.hasError('email')">
-            Please enter a valid email address
-          </mat-error>
-        </mat-form-field>
+          <mat-form-field class="w-full">
+            <mat-label>Email address</mat-label>
+            <input id="email" matInput formControlName="email" />
+            <mat-error *ngIf="registerForm.get('email')?.hasError('required')">
+              Email address is required
+            </mat-error>
+            <mat-error *ngIf="registerForm.get('email')?.hasError('email')">
+              Please enter a valid email address
+            </mat-error>
+          </mat-form-field>
 
-        <!-- Password field -->
-        <mat-form-field class="w-full">
-          <mat-label>Password</mat-label>
-          <input
-            id="password"
-            matInput
-            type="password"
-            formControlName="password"
-            #passwordField
-          />
+          <!-- Password field -->
+          <mat-form-field class="w-full">
+            <mat-label>Password</mat-label>
+            <input
+              id="password"
+              matInput
+              type="password"
+              formControlName="password"
+              #passwordField
+            />
+            <button
+              mat-icon-button
+              type="button"
+              (click)="
+                passwordField.type === 'password'
+                  ? (passwordField.type = 'text')
+                  : (passwordField.type = 'password')
+              "
+              matSuffix
+            >
+              <mat-icon matSuffix *ngIf="passwordField.type === 'password'"
+                >visibility</mat-icon
+              >
+              <mat-icon matSuffix *ngIf="passwordField.type !== 'password'"
+                >visibility_off</mat-icon
+              >
+            </button>
+            <mat-error> Password is required </mat-error>
+          </mat-form-field>
+
+          <mat-form-field class="w-full">
+            <mat-label>Repeat Password</mat-label>
+            <input
+              id="repeatPassword"
+              matInput
+              type="password"
+              formControlName="repeatPassword"
+              #repeatPasswordField
+            />
+            <button
+              mat-icon-button
+              type="button"
+              (click)="
+                repeatPasswordField.type === 'password'
+                  ? (repeatPasswordField.type = 'text')
+                  : (repeatPasswordField.type = 'password')
+              "
+              matSuffix
+            >
+              <mat-icon
+                matSuffix
+                *ngIf="repeatPasswordField.type === 'password'"
+                >visibility</mat-icon
+              >
+              <mat-icon
+                matSuffix
+                *ngIf="repeatPasswordField.type !== 'password'"
+                >visibility_off</mat-icon
+              >
+            </button>
+            <mat-error> Passwords don't match </mat-error>
+          </mat-form-field>
+
           <button
-            mat-icon-button
-            type="button"
-            (click)="
-              passwordField.type === 'password'
-                ? (passwordField.type = 'text')
-                : (passwordField.type = 'password')
-            "
-            matSuffix
+            class="w-full mt-6"
+            mat-flat-button
+            color="primary"
+            [disabled]="registerForm.disabled"
+            type="submit"
           >
-            <mat-icon matSuffix *ngIf="passwordField.type === 'password'"
-              >visibility</mat-icon
-            >
-            <mat-icon matSuffix *ngIf="passwordField.type !== 'password'"
-              >visibility_off</mat-icon
-            >
+            <span *ngIf="!registerForm.disabled"> Register </span>
           </button>
-          <mat-error> Password is required </mat-error>
-        </mat-form-field>
-
-        <!-- Repeat Password field -->
-        <mat-form-field class="w-full">
-          <mat-label>Repeat Password</mat-label>
-          <input
-            id="repeatPassword"
-            matInput
-            type="password"
-            formControlName="repeatPassword"
-            #repeatPasswordField
-          />
-          <button
-            mat-icon-button
-            type="button"
-            (click)="
-              repeatPasswordField.type === 'password'
-                ? (repeatPasswordField.type = 'text')
-                : (repeatPasswordField.type = 'password')
-            "
-            matSuffix
-          >
-            <mat-icon matSuffix *ngIf="repeatPasswordField.type === 'password'"
-              >visibility</mat-icon
-            >
-            <mat-icon matSuffix *ngIf="repeatPasswordField.type !== 'password'"
-              >visibility_off</mat-icon
-            >
-          </button>
-          <mat-error> Passwords don't match </mat-error>
-        </mat-form-field>
-
-        <!-- Submit button -->
-        <button
-          class="w-full mt-6"
-          mat-flat-button
-          color="primary"
-          [disabled]="registerForm.disabled"
-          type="submit"
-        >
-          <span *ngIf="!registerForm.disabled"> Register </span>
-        </button>
-      </form>
+        </form>
+      </div>
     </div>
   </div>
-</div>
+</ng-template>

@@ -3,7 +3,7 @@ import { MatSnackBarConfig } from '@angular/material/snack-bar';
 export class SnackBarConfig {
   public static getDefaultConfig(): MatSnackBarConfig {
     return {
-      duration: 2000,
+      duration: 3000,
       horizontalPosition: 'right',
       verticalPosition: 'top',
       data: {},
