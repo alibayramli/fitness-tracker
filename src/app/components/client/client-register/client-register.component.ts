@@ -168,7 +168,7 @@ export class ClientRegisterComponent implements OnInit {
             RegisterClientSnackBar.UPDATE_SUCCESS
           );
           this.registerForm.reset();
-          this.router.navigate(['list']);
+          this.router.navigate(['client-lists']);
         },
       });
   }
