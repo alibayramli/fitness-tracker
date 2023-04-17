@@ -20,6 +20,7 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { SnackBarService } from 'src/app/shared/services/snack-bar.service';
 import { FirebaseError } from 'firebase/app';
 import { BehaviorSubject } from 'rxjs';
+import { MatCardModule } from '@angular/material/card';
 
 @Component({
   selector: 'app-auth-login',
@@ -35,6 +36,7 @@ import { BehaviorSubject } from 'rxjs';
     MatFormFieldModule,
     MatCheckboxModule,
     MatProgressSpinnerModule,
+    MatCardModule,
   ],
   templateUrl: './auth-login.component.html',
   styleUrls: ['./auth-login.component.scss'],

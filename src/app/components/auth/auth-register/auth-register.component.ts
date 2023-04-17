@@ -18,6 +18,7 @@ import { FirebaseError } from 'firebase/app';
 import { BehaviorSubject } from 'rxjs';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { SnackBarService } from 'src/app/shared/services/snack-bar.service';
+import { MatCardModule } from '@angular/material/card';
 
 @Component({
   selector: 'app-auth-register',
@@ -33,6 +34,7 @@ import { SnackBarService } from 'src/app/shared/services/snack-bar.service';
     MatFormFieldModule,
     MatCheckboxModule,
     MatProgressSpinnerModule,
+    MatCardModule,
   ],
   templateUrl: './auth-register.component.html',
   styleUrls: ['./auth-register.component.scss'],
