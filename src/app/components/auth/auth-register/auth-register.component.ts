@@ -1,24 +1,21 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { Router, RouterModule } from '@angular/router';
+import { RouterModule } from '@angular/router';
 import {
   FormBuilder,
   FormGroup,
   ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
-import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatCheckboxModule } from '@angular/material/checkbox';
-import { FirebaseError } from 'firebase/app';
-import { BehaviorSubject } from 'rxjs';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
-import { SnackBarService } from 'src/app/shared/services/snack-bar.service';
 import { MatCardModule } from '@angular/material/card';
+import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
   selector: 'app-auth-register',
@@ -41,15 +38,8 @@ import { MatCardModule } from '@angular/material/card';
 })
 export class AuthRegisterComponent implements OnInit {
   public registerForm!: FormGroup;
-  private isSpinnerActive = new BehaviorSubject<boolean>(false);
-  public isSpinnerActive$ = this.isSpinnerActive.asObservable();
 
-  constructor(
-    private fb: FormBuilder,
-    private afAuth: AngularFireAuth,
-    private snackbarService: SnackBarService,
-    private router: Router
-  ) {}
+  constructor(private fb: FormBuilder, public authService: AuthService) {}
   ngOnInit(): void {
     this.registerForm = this.fb.group({
       name: ['', Validators.required],
@@ -59,19 +49,8 @@ export class AuthRegisterComponent implements OnInit {
     });
   }
   register(): void {
-    const email = this.registerForm.value.email;
-    const password = this.registerForm.value.password;
-    this.isSpinnerActive.next(true);
-    this.afAuth
-      .createUserWithEmailAndPassword(email, password)
-      .then(() => {
-        this.isSpinnerActive.next(false);
-        this.snackbarService.openSnackBar('Successful registration!');
-        this.router.navigate(['/auth-login']);
-      })
-      .catch((error: FirebaseError) => {
-        this.isSpinnerActive.next(false);
-        this.snackbarService.openSnackBar(error.message);
-      });
+    const email = this.registerForm.get('email')?.value;
+    const password = this.registerForm.get('password')?.value;
+    this.authService.register(email, password);
   }
 }

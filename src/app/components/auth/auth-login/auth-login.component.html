@@ -1,6 +1,6 @@
 <div
   class="fixed inset-0 flex items-center justify-center"
-  *ngIf="isSpinnerActive$ | async; else formLogin"
+  *ngIf="authService.isSpinnerActive$ | async; else formLogin"
 >
   <mat-spinner diameter="50" color="accent"></mat-spinner>
 </div>
@@ -79,7 +79,7 @@
             </mat-checkbox>
             <a
               class="text-md font-medium text-primary-500 hover:underline"
-              [routerLink]="['/auth-forgot-password']"
+              [routerLink]="['/auth-recover-password']"
               >Forgot password?
             </a>
           </div>

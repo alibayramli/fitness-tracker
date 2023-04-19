@@ -1,9 +1,10 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatIconModule } from '@angular/material/icon';
 import { RouterModule } from '@angular/router';
+import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
   selector: 'app-auth-user-profile',
@@ -19,17 +20,9 @@ import { RouterModule } from '@angular/router';
   styleUrls: ['./auth-user-profile.component.scss'],
 })
 export class AuthUserProfileComponent {
-  user = { name: 'Ali', email: 'ali@gmail.com' };
-
-  register() {
-    console.log('register');
-  }
-
-  login() {
-    console.log('signin');
-  }
+  private authService = inject(AuthService);
 
   logOut() {
-    console.log('signout');
+    this.authService.logOut();
   }
 }
