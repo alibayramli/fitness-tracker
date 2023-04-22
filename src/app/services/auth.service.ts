@@ -1,6 +1,12 @@
 import { Injectable, inject } from '@angular/core';
 import { Router } from '@angular/router';
-import { AngularFireAuth } from '@angular/fire/compat/auth';
+import {
+  Auth,
+  createUserWithEmailAndPassword,
+  signInWithEmailAndPassword,
+  sendPasswordResetEmail,
+  sendEmailVerification,
+} from '@angular/fire/auth';
 import { BehaviorSubject } from 'rxjs';
 import { SnackBarService } from '../shared/services/snack-bar.service';
 import { FirebaseError } from 'firebase/app';
@@ -10,7 +16,7 @@ import { FirebaseError } from 'firebase/app';
 })
 export class AuthService {
   private router = inject(Router);
-  private afAuth = inject(AngularFireAuth);
+  private afAuth = inject(Auth);
   private snackbarService = inject(SnackBarService);
   private isSpinnerActive = new BehaviorSubject<boolean>(false);
   public isSpinnerActive$ = this.isSpinnerActive.asObservable();
@@ -18,7 +24,7 @@ export class AuthService {
   public async register(email: string, password: string) {
     try {
       this.isSpinnerActive.next(true);
-      await this.afAuth.createUserWithEmailAndPassword(email, password);
+      await createUserWithEmailAndPassword(this.afAuth, email, password);
       await this.verifyEmail();
     } catch (error) {
       this.isSpinnerActive.next(false);
@@ -31,7 +37,8 @@ export class AuthService {
   public async login(email: string, password: string) {
     try {
       this.isSpinnerActive.next(true);
-      const user = await this.afAuth.signInWithEmailAndPassword(
+      const user = await signInWithEmailAndPassword(
+        this.afAuth,
         email,
         password
       );
@@ -53,7 +60,7 @@ export class AuthService {
   public async recoverPassword(email: string) {
     try {
       this.isSpinnerActive.next(true);
-      await this.afAuth.sendPasswordResetEmail(email);
+      await sendPasswordResetEmail(this.afAuth, email);
       this.snackbarService.openSnackBar(
         'We sent you an email to recover your password'
       );
@@ -75,8 +82,10 @@ export class AuthService {
   }
 
   private async verifyEmail() {
-    const user = await this.afAuth.currentUser;
-    await user?.sendEmailVerification();
+    const user = this.afAuth.currentUser;
+    if (user) {
+      await sendEmailVerification(user);
+    }
     this.isSpinnerActive.next(false);
     this.snackbarService.openSnackBar('Verification sent to your email!');
     this.router.navigate(['auth-login']);

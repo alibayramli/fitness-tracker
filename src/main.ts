@@ -4,7 +4,10 @@ import { provideHttpClient, withInterceptors } from '@angular/common/http';
 import { ReactiveFormsModule } from '@angular/forms';
 import { provideAnimations } from '@angular/platform-browser/animations';
 import { provideRouter } from '@angular/router';
-import { AngularFireModule } from '@angular/fire/compat';
+
+import { initializeApp, provideFirebaseApp } from '@angular/fire/app';
+import { provideFirestore, getFirestore } from '@angular/fire/firestore';
+import { getAuth, provideAuth } from '@angular/fire/auth';
 
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatDialogModule } from '@angular/material/dialog';
@@ -54,7 +57,9 @@ bootstrapApplication(AppComponent, {
       MatChipsModule,
       MatDialogModule,
       MatSnackBarModule,
-      AngularFireModule.initializeApp(environment.firebaseConfig)
+      provideFirebaseApp(() => initializeApp(environment.firebaseConfig)),
+      provideAuth(() => getAuth()),
+      provideFirestore(() => getFirestore())
     ),
     provideAnimations(),
     provideRouter(APP_ROUTES),
