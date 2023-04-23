@@ -29,7 +29,7 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 
 import { AppComponent } from './app/components/app.component';
 import { APP_ROUTES } from './app/components/app.routes';
-import { provideTransloco } from './app/helpers/provideTransloco';
+import { provideTransloco } from './app/utils/provideTransloco';
 import {
   AVAILABLE_LANGUAGES,
   DEFAULT_LANGUGE,
