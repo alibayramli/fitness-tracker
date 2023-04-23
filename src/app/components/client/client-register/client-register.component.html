@@ -1,170 +1,186 @@
-<div class="registration-form m-3 p-3">
-  <img
-    width="200"
-    src="assets/images/app-logo.jpg"
-    alt="App logo"
-    class="mx-auto mb-3"
-  />
-
-  <form [formGroup]="registerForm">
-    <div class="grid sm:grid-cols-1 md:grid-cols-2 gap-4">
-      <mat-form-field appearance="outline">
-        <mat-label>First name</mat-label>
-        <input formControlName="firstName" matInput placeholder="First name" />
-        <mat-icon matSuffix>person</mat-icon>
-      </mat-form-field>
-
-      <mat-form-field appearance="outline">
-        <mat-label>Last name</mat-label>
-        <input formControlName="lastName" matInput placeholder="Last name" />
-        <mat-icon matSuffix>person</mat-icon>
-      </mat-form-field>
-
-      <mat-form-field appearance="outline">
-        <mat-label>Gender</mat-label>
-        <mat-select formControlName="gender">
-          <mat-option *ngFor="let gender of genders" [value]="gender">
-            {{ gender }}
-          </mat-option>
-        </mat-select>
-      </mat-form-field>
-
-      <mat-form-field appearance="outline">
-        <mat-label>Email</mat-label>
-        <input formControlName="email" matInput placeholder="Email" />
-        <mat-icon matSuffix>mail</mat-icon>
-      </mat-form-field>
-
-      <mat-form-field appearance="outline">
-        <mat-label>Height</mat-label>
-        <input
-          formControlName="height"
-          matInput
-          placeholder="height"
-          type="number"
-        />
-        <mat-icon matSuffix>height</mat-icon>
-        <mat-hint>Unit is meters</mat-hint>
-      </mat-form-field>
-
-      <mat-form-field appearance="outline">
-        <mat-label>Weight</mat-label>
-        <input
-          formControlName="weight"
-          matInput
-          placeholder="weight"
-          type="number"
-        />
-        <mat-icon matSuffix>line_weight</mat-icon>
-        <mat-hint>Unit is KGs</mat-hint>
-      </mat-form-field>
-
-      <mat-form-field appearance="outline">
-        <mat-label>BMI</mat-label>
-        <input
-          formControlName="bmi"
-          readonly
-          type="number"
-          matInput
-          placeholder="BMI"
-        />
-        <mat-icon matSuffix>check_circle</mat-icon>
-      </mat-form-field>
-
-      <mat-form-field appearance="outline">
-        <mat-label>BMI Result</mat-label>
-        <input
-          formControlName="bmiResult"
-          readonly
-          matInput
-          placeholder="BMI Result"
-        />
-        <mat-icon matSuffix>check_circle</mat-icon>
-      </mat-form-field>
-
-      <mat-form-field appearance="outline">
-        <mat-label>Select package</mat-label>
-        <mat-select formControlName="package">
-          <mat-option *ngFor="let package of packages" [value]="package">
-            {{ package }}
-          </mat-option>
-        </mat-select>
-      </mat-form-field>
-
-      <mat-form-field appearance="outline">
-        <mat-label>Which of the following is important to you?</mat-label>
-        <mat-select formControlName="importantGoals" multiple>
-          <mat-option
-            *ngFor="let importantGoal of importantGoals"
-            [value]="importantGoal"
-          >
-            {{ importantGoal }}
-          </mat-option>
-        </mat-select>
-      </mat-form-field>
-
-      <mat-form-field appearance="outline">
-        <mat-label>Have been in Gym before?</mat-label>
-        <mat-select formControlName="haveBeenInGymBefore">
-          <mat-option
-            *ngFor="let option of haveBeenInGymBefore"
-            [value]="option"
-          >
-            {{ option }}
-          </mat-option>
-        </mat-select>
-      </mat-form-field>
-
-      <mat-form-field appearance="outline">
-        <mat-label>Do you require trainer?</mat-label>
-        <mat-select formControlName="haveBeenInGymBefore">
-          <mat-option *ngFor="let option of trainerOptions" [value]="option">
-            {{ option }}
-          </mat-option>
-        </mat-select>
-      </mat-form-field>
-
-      <mat-form-field appearance="outline">
-        <mat-label>Mobile number</mat-label>
-        <input formControlName="mobile" matInput placeholder="Mobile number" />
-        <mat-icon matSuffix>call</mat-icon>
-      </mat-form-field>
-
-      <mat-form-field appearance="outline">
-        <mat-label>Enquiry date</mat-label>
-        <input
-          formControlName="enquiryDate"
-          matInput
-          [matDatepicker]="picker"
-        />
-        <mat-hint>MM/DD/YYYY</mat-hint>
-        <mat-datepicker-toggle
-          matIconSuffix
-          [for]="picker"
-        ></mat-datepicker-toggle>
-        <mat-datepicker #picker></mat-datepicker>
-      </mat-form-field>
-    </div>
-
-    <button
-      *ngIf="!isUpdateActive"
-      (click)="submitClient()"
-      [disabled]="!registerForm.valid"
-      class="mt-4"
-      mat-raised-button
-      color="accent"
-    >
-      Submit
-    </button>
-
-    <button
-      *ngIf="isUpdateActive"
-      (click)="updateClient()"
-      class="mt-4"
-      mat-raised-button
-      color="accent"
-    >
-      Update
-    </button>
-  </form>
+<div
+  class="fixed inset-0 flex items-center justify-center"
+  *ngIf="clientService.isSpinnerActive$ | async; else formRegister"
+>
+  <mat-spinner diameter="50" color="accent"></mat-spinner>
 </div>
+
+<ng-template #formRegister>
+  <div class="registration-form m-3 p-3">
+    <img
+      width="200"
+      src="assets/images/app-logo.jpg"
+      alt="App logo"
+      class="mx-auto mb-3"
+    />
+    <form [formGroup]="registerForm">
+      <div class="grid sm:grid-cols-1 md:grid-cols-2 gap-4">
+        <mat-form-field appearance="outline">
+          <mat-label>First name</mat-label>
+          <input
+            formControlName="firstName"
+            matInput
+            placeholder="First name"
+          />
+          <mat-icon matSuffix>person</mat-icon>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+          <mat-label>Last name</mat-label>
+          <input formControlName="lastName" matInput placeholder="Last name" />
+          <mat-icon matSuffix>person</mat-icon>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+          <mat-label>Gender</mat-label>
+          <mat-select formControlName="gender">
+            <mat-option *ngFor="let gender of genders" [value]="gender">
+              {{ gender }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+          <mat-label>Email</mat-label>
+          <input formControlName="email" matInput placeholder="Email" />
+          <mat-icon matSuffix>mail</mat-icon>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+          <mat-label>Height</mat-label>
+          <input
+            formControlName="height"
+            matInput
+            placeholder="height"
+            type="number"
+          />
+          <mat-icon matSuffix>height</mat-icon>
+          <mat-hint>Unit is meters</mat-hint>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+          <mat-label>Weight</mat-label>
+          <input
+            formControlName="weight"
+            matInput
+            placeholder="weight"
+            type="number"
+          />
+          <mat-icon matSuffix>line_weight</mat-icon>
+          <mat-hint>Unit is KGs</mat-hint>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+          <mat-label>BMI</mat-label>
+          <input
+            formControlName="bmi"
+            readonly
+            type="number"
+            matInput
+            placeholder="BMI"
+          />
+          <mat-icon matSuffix>check_circle</mat-icon>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+          <mat-label>BMI Result</mat-label>
+          <input
+            formControlName="bmiResult"
+            readonly
+            matInput
+            placeholder="BMI Result"
+          />
+          <mat-icon matSuffix>check_circle</mat-icon>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+          <mat-label>Select package</mat-label>
+          <mat-select formControlName="package">
+            <mat-option *ngFor="let package of packages" [value]="package">
+              {{ package }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+          <mat-label>Which of the following is important to you?</mat-label>
+          <mat-select formControlName="importantGoals" multiple>
+            <mat-option
+              *ngFor="let importantGoal of importantGoals"
+              [value]="importantGoal"
+            >
+              {{ importantGoal }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+          <mat-label>Have been in Gym before?</mat-label>
+          <mat-select formControlName="haveBeenInGymBefore">
+            <mat-option
+              *ngFor="let option of haveBeenInGymBefore"
+              [value]="option"
+            >
+              {{ option }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+          <mat-label>Do you require trainer?</mat-label>
+          <mat-select formControlName="haveBeenInGymBefore">
+            <mat-option *ngFor="let option of trainerOptions" [value]="option">
+              {{ option }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+          <mat-label>Mobile number</mat-label>
+          <input
+            formControlName="mobile"
+            matInput
+            placeholder="Mobile number"
+          />
+          <mat-icon matSuffix>call</mat-icon>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+          <mat-label>Enquiry date</mat-label>
+          <input
+            formControlName="enquiryDate"
+            matInput
+            [matDatepicker]="picker"
+          />
+          <mat-hint>MM/DD/YYYY</mat-hint>
+          <mat-datepicker-toggle
+            matIconSuffix
+            [for]="picker"
+          ></mat-datepicker-toggle>
+          <mat-datepicker #picker></mat-datepicker>
+        </mat-form-field>
+      </div>
+
+      <button
+        *ngIf="!isUpdateActive"
+        (click)="submitClient()"
+        [disabled]="!registerForm.valid"
+        class="mt-4"
+        mat-raised-button
+        color="accent"
+      >
+        Submit
+      </button>
+
+      <button
+        *ngIf="isUpdateActive"
+        (click)="updateClient()"
+        class="mt-4"
+        mat-raised-button
+        color="accent"
+      >
+        Update
+      </button>
+    </form>
+  </div>
+</ng-template>

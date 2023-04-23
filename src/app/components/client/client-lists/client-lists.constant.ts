@@ -1,5 +1,5 @@
 export const DISPLAYED_COLUMNS = [
-  'id',
+  // 'id',
   'firstName',
   'lastName',
   // 'email',

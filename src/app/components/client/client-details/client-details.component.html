@@ -1,66 +1,76 @@
-<mat-card *ngIf="clientDetail" class="example-card">
-  <mat-card-header>
-    <div mat-card-avatar class="example-header-image"></div>
-    <mat-card-title
-      >{{ clientDetail.firstName }} {{ clientDetail.lastName }}</mat-card-title
-    >
-    <mat-card-subtitle>{{ clientDetail.email }}</mat-card-subtitle>
-  </mat-card-header>
+<div
+  class="fixed inset-0 flex items-center justify-center"
+  *ngIf="clientService.isSpinnerActive$ | async; else clientDetails"
+>
+  <mat-spinner diameter="50" color="accent"></mat-spinner>
+</div>
 
-  <mat-card-content>
-    <mat-list>
-      <mat-list-item>
-        <div matLine>
-          Mobile Number:
-          <button mat-button>{{ clientDetail.lastName }}</button>
-        </div>
-      </mat-list-item>
+<ng-template #clientDetails>
+  <mat-card *ngIf="clientDetail" class="example-card">
+    <mat-card-header>
+      <div mat-card-avatar class="example-header-image"></div>
+      <mat-card-title
+        >{{ clientDetail.firstName }}
+        {{ clientDetail.lastName }}</mat-card-title
+      >
+      <mat-card-subtitle>{{ clientDetail.email }}</mat-card-subtitle>
+    </mat-card-header>
 
-      <mat-list-item>
-        <div matLine>
-          Gender:
-          <button mat-button>{{ clientDetail.gender }}</button>
-        </div>
-      </mat-list-item>
+    <mat-card-content>
+      <mat-list>
+        <mat-list-item>
+          <div matLine>
+            Mobile Number:
+            <button mat-button>{{ clientDetail.lastName }}</button>
+          </div>
+        </mat-list-item>
 
-      <mat-list-item>
-        <div matLine>
-          Package:
-          <button mat-button>{{ clientDetail.package }}</button>
-        </div>
-      </mat-list-item>
+        <mat-list-item>
+          <div matLine>
+            Gender:
+            <button mat-button>{{ clientDetail.gender }}</button>
+          </div>
+        </mat-list-item>
 
-      <mat-list-item>
-        <div matLine>
-          BMI:
-          <button mat-button>{{ clientDetail.bmi }}</button>
-        </div>
-      </mat-list-item>
+        <mat-list-item>
+          <div matLine>
+            Package:
+            <button mat-button>{{ clientDetail.package }}</button>
+          </div>
+        </mat-list-item>
 
-      <mat-list-item>
-        <div matLine>
-          BMI Result:
-          <button mat-button>{{ clientDetail.bmiResult }}</button>
-        </div>
-      </mat-list-item>
-      <mat-list-item>
-        <div matLine>
-          Trainer Require:
-          <button mat-button>{{ clientDetail.requireTrainer }}</button>
-        </div>
-      </mat-list-item>
-      <mat-list-item>
-        <div matLine>
-          Goals:
-          <button mat-button>
-            <mat-chip-listbox>
-              <ng-container *ngFor="let row of clientDetail.importantGoals">
-                <mat-chip-option selected>{{ row }}</mat-chip-option>
-              </ng-container>
-            </mat-chip-listbox>
-          </button>
-        </div>
-      </mat-list-item>
-    </mat-list>
-  </mat-card-content>
-</mat-card>
+        <mat-list-item>
+          <div matLine>
+            BMI:
+            <button mat-button>{{ clientDetail.bmi }}</button>
+          </div>
+        </mat-list-item>
+
+        <mat-list-item>
+          <div matLine>
+            BMI Result:
+            <button mat-button>{{ clientDetail.bmiResult }}</button>
+          </div>
+        </mat-list-item>
+        <mat-list-item>
+          <div matLine>
+            Trainer Require:
+            <button mat-button>{{ clientDetail.requireTrainer }}</button>
+          </div>
+        </mat-list-item>
+        <mat-list-item>
+          <div matLine>
+            Goals:
+            <button mat-button>
+              <mat-chip-listbox>
+                <ng-container *ngFor="let row of clientDetail.importantGoals">
+                  <mat-chip-option selected>{{ row }}</mat-chip-option>
+                </ng-container>
+              </mat-chip-listbox>
+            </button>
+          </div>
+        </mat-list-item>
+      </mat-list>
+    </mat-card-content>
+  </mat-card>
+</ng-template>

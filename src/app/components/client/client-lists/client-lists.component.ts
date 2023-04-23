@@ -1,6 +1,6 @@
 import { Component, OnInit, OnDestroy, ViewChild } from '@angular/core';
 import { Router, RouterLink } from '@angular/router';
-import { DatePipe } from '@angular/common';
+import { CommonModule, DatePipe } from '@angular/common';
 import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
 import { MatSort, MatSortModule } from '@angular/material/sort';
 import { MatTableDataSource, MatTableModule } from '@angular/material/table';
@@ -8,8 +8,9 @@ import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { TranslocoModule } from '@ngneat/transloco';
-import { filter, takeUntil, Subject } from 'rxjs';
+import { filter, takeUntil, Subject, switchMap } from 'rxjs';
 import { ClientService } from 'src/app/services/client.service';
 import { DialogService } from 'src/app/shared/services/dialog.service';
 import { SnackBarService } from 'src/app/shared/services/snack-bar.service';
@@ -26,6 +27,7 @@ import {
   styleUrls: ['./client-lists.component.scss'],
   standalone: true,
   imports: [
+    CommonModule,
     DatePipe,
     RouterLink,
     MatButtonModule,
@@ -35,6 +37,7 @@ import {
     MatSortModule,
     MatPaginatorModule,
     MatIconModule,
+    MatProgressSpinnerModule,
     TranslocoModule,
   ],
 })
@@ -48,10 +51,10 @@ export class ClientListsComponent implements OnInit, OnDestroy {
   @ViewChild(MatSort) sort!: MatSort;
 
   constructor(
-    private clientService: ClientService,
     private router: Router,
     private dialogService: DialogService,
-    private snackBarService: SnackBarService
+    private snackBarService: SnackBarService,
+    public clientService: ClientService
   ) {}
 
   ngOnInit(): void {
@@ -82,22 +85,13 @@ export class ClientListsComponent implements OnInit, OnDestroy {
         },
       })
       .pipe(
+        takeUntil(this._unsubscribeAll),
         filter((isConfirmed) => isConfirmed),
-        takeUntil(this._unsubscribeAll)
+        switchMap(() => this.clientService.deleteClient(id))
       )
       .subscribe({
         next: () => {
-          this.clientService
-            .deleteClient(id)
-            .pipe(takeUntil(this._unsubscribeAll))
-            .subscribe({
-              next: () => {
-                this.snackBarService.openSnackBar(
-                  ClientsListSnackBar.DELETE_SUCCESS
-                );
-                this.getClients();
-              },
-            });
+          this.snackBarService.openSnackBar(ClientsListSnackBar.DELETE_SUCCESS);
         },
       });
   }

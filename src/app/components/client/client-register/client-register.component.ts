@@ -5,7 +5,7 @@ import {
   Validators,
   ReactiveFormsModule,
 } from '@angular/forms';
-import { NgFor, NgIf } from '@angular/common';
+import { CommonModule } from '@angular/common';
 import { ActivatedRoute, Router } from '@angular/router';
 import { MatButtonModule } from '@angular/material/button';
 import { MatDatepickerModule } from '@angular/material/datepicker';
@@ -15,6 +15,7 @@ import { MatRadioModule } from '@angular/material/radio';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { combineLatest, filter, switchMap, tap } from 'rxjs';
 import { IClient } from 'src/app/models/client.model';
 import { ClientService } from 'src/app/services/client.service';
@@ -39,8 +40,7 @@ import {
   styleUrls: ['./client-register.component.scss'],
   standalone: true,
   imports: [
-    NgFor,
-    NgIf,
+    CommonModule,
     ReactiveFormsModule,
     MatFormFieldModule,
     MatInputModule,
@@ -50,6 +50,7 @@ import {
     MatOptionModule,
     MatDatepickerModule,
     MatButtonModule,
+    MatProgressSpinnerModule,
   ],
 })
 export class ClientRegisterComponent implements OnInit {
@@ -68,10 +69,10 @@ export class ClientRegisterComponent implements OnInit {
 
   constructor(
     private fb: FormBuilder,
-    private clientService: ClientService,
     private snackBarService: SnackBarService,
     private activatedRoute: ActivatedRoute,
-    private router: Router
+    private router: Router,
+    public clientService: ClientService
   ) {}
 
   ngOnInit(): void {

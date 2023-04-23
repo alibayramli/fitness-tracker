@@ -1,10 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { NgIf, NgFor } from '@angular/common';
+import { CommonModule } from '@angular/common';
 import { MatChipsModule } from '@angular/material/chips';
 import { MatButtonModule } from '@angular/material/button';
 import { MatListModule } from '@angular/material/list';
 import { MatCardModule } from '@angular/material/card';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { switchMap } from 'rxjs';
 import { ClientService } from 'src/app/services/client.service';
 import { IClient } from 'src/app/models/client.model';
@@ -15,12 +16,12 @@ import { IClient } from 'src/app/models/client.model';
   styleUrls: ['./client-details.component.scss'],
   standalone: true,
   imports: [
-    NgIf,
-    NgFor,
+    CommonModule,
     MatCardModule,
     MatListModule,
     MatButtonModule,
     MatChipsModule,
+    MatProgressSpinnerModule,
   ],
 })
 export class ClientDetailsComponent implements OnInit {
@@ -29,7 +30,7 @@ export class ClientDetailsComponent implements OnInit {
 
   constructor(
     private activatedRoute: ActivatedRoute,
-    private clientService: ClientService
+    public clientService: ClientService
   ) {}
 
   ngOnInit(): void {
