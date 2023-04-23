@@ -171,6 +171,7 @@
 
       <button
         *ngIf="isUpdateActive"
+        [disabled]="registerForm.pristine"
         (click)="updateClient()"
         class="mt-4"
         mat-raised-button
