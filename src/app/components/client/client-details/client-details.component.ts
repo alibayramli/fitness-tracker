@@ -5,10 +5,10 @@ import { MatChipsModule } from '@angular/material/chips';
 import { MatButtonModule } from '@angular/material/button';
 import { MatListModule } from '@angular/material/list';
 import { MatCardModule } from '@angular/material/card';
-import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { switchMap } from 'rxjs';
 import { ClientService } from 'src/app/services/client.service';
 import { IClient } from 'src/app/models/client.model';
+import { SpinnerComponent } from 'src/app/shared/components/spinner/spinner.component';
 
 @Component({
   selector: 'app-client-detail',
@@ -21,7 +21,7 @@ import { IClient } from 'src/app/models/client.model';
     MatListModule,
     MatButtonModule,
     MatChipsModule,
-    MatProgressSpinnerModule,
+    SpinnerComponent,
   ],
 })
 export class ClientDetailsComponent implements OnInit {

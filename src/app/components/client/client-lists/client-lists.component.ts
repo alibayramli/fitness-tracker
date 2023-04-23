@@ -8,7 +8,6 @@ import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
-import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { TranslocoModule } from '@ngneat/transloco';
 import { filter, takeUntil, Subject, switchMap } from 'rxjs';
 import { ClientService } from 'src/app/services/client.service';
@@ -20,6 +19,7 @@ import {
   ClientsListSnackBar,
   ClientsListDialog,
 } from './client-lists.constant';
+import { SpinnerComponent } from 'src/app/shared/components/spinner/spinner.component';
 
 @Component({
   selector: 'app-client-lists',
@@ -37,8 +37,8 @@ import {
     MatSortModule,
     MatPaginatorModule,
     MatIconModule,
-    MatProgressSpinnerModule,
     TranslocoModule,
+    SpinnerComponent,
   ],
 })
 export class ClientListsComponent implements OnInit, OnDestroy {

@@ -13,9 +13,9 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
-import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatCardModule } from '@angular/material/card';
 import { AuthService } from 'src/app/services/auth.service';
+import { SpinnerComponent } from 'src/app/shared/components/spinner/spinner.component';
 
 @Component({
   selector: 'app-auth-login',
@@ -30,8 +30,8 @@ import { AuthService } from 'src/app/services/auth.service';
     MatInputModule,
     MatFormFieldModule,
     MatCheckboxModule,
-    MatProgressSpinnerModule,
     MatCardModule,
+    SpinnerComponent,
   ],
   templateUrl: './auth-login.component.html',
   styleUrls: ['./auth-login.component.scss'],

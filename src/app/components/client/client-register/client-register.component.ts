@@ -15,7 +15,6 @@ import { MatRadioModule } from '@angular/material/radio';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
-import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { combineLatest, filter, switchMap, tap } from 'rxjs';
 import { IClient } from 'src/app/models/client.model';
 import { ClientService } from 'src/app/services/client.service';
@@ -33,6 +32,7 @@ import {
   RegisterClientSnackBar,
   BMIResult,
 } from './client-register.constant';
+import { SpinnerComponent } from 'src/app/shared/components/spinner/spinner.component';
 
 @Component({
   selector: 'app-register-client',
@@ -50,7 +50,7 @@ import {
     MatOptionModule,
     MatDatepickerModule,
     MatButtonModule,
-    MatProgressSpinnerModule,
+    SpinnerComponent,
   ],
 })
 export class ClientRegisterComponent implements OnInit {

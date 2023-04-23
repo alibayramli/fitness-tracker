@@ -13,9 +13,9 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatCheckboxModule } from '@angular/material/checkbox';
-import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatCardModule } from '@angular/material/card';
 import { AuthService } from 'src/app/services/auth.service';
+import { SpinnerComponent } from 'src/app/shared/components/spinner/spinner.component';
 
 @Component({
   selector: 'app-auth-register',
@@ -30,8 +30,8 @@ import { AuthService } from 'src/app/services/auth.service';
     MatInputModule,
     MatFormFieldModule,
     MatCheckboxModule,
-    MatProgressSpinnerModule,
     MatCardModule,
+    SpinnerComponent,
   ],
   templateUrl: './auth-register.component.html',
   styleUrls: ['./auth-register.component.scss'],

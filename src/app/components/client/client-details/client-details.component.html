@@ -1,9 +1,6 @@
-<div
-  class="fixed inset-0 flex items-center justify-center"
+<app-spinner
   *ngIf="clientService.isSpinnerActive$ | async; else clientDetails"
->
-  <mat-spinner diameter="50" color="accent"></mat-spinner>
-</div>
+></app-spinner>
 
 <ng-template #clientDetails>
   <mat-card *ngIf="clientDetail" class="example-card">

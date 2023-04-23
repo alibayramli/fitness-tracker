@@ -7,12 +7,12 @@ import {
   Validators,
 } from '@angular/forms';
 import { MatFormFieldModule } from '@angular/material/form-field';
-import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatButtonModule } from '@angular/material/button';
 import { RouterLink } from '@angular/router';
 import { MatInputModule } from '@angular/material/input';
 import { MatCardModule } from '@angular/material/card';
 import { AuthService } from 'src/app/services/auth.service';
+import { SpinnerComponent } from 'src/app/shared/components/spinner/spinner.component';
 
 @Component({
   selector: 'app-recover-password',
@@ -24,8 +24,8 @@ import { AuthService } from 'src/app/services/auth.service';
     MatButtonModule,
     MatInputModule,
     MatFormFieldModule,
-    MatProgressSpinnerModule,
     MatCardModule,
+    SpinnerComponent,
   ],
   templateUrl: './auth-recover-password.component.html',
   styleUrls: ['./auth-recover-password.component.scss'],
