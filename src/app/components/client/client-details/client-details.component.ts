@@ -5,6 +5,7 @@ import { MatChipsModule } from '@angular/material/chips';
 import { MatButtonModule } from '@angular/material/button';
 import { MatListModule } from '@angular/material/list';
 import { MatCardModule } from '@angular/material/card';
+import { MatIconModule } from '@angular/material/icon';
 import { switchMap } from 'rxjs';
 import { ClientService } from 'src/app/services/client.service';
 import { IClient } from 'src/app/models/client.model';
@@ -21,6 +22,7 @@ import { SpinnerComponent } from 'src/app/shared/components/spinner/spinner.comp
     MatListModule,
     MatButtonModule,
     MatChipsModule,
+    MatIconModule,
     SpinnerComponent,
   ],
 })
