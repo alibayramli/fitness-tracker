@@ -49,8 +49,9 @@ export class AuthRegisterComponent implements OnInit {
     });
   }
   register(): void {
+    const displayName = this.registerForm.get('name')?.value.split(' ')[0];
     const email = this.registerForm.get('email')?.value;
     const password = this.registerForm.get('password')?.value;
-    this.authService.register(email, password);
+    this.authService.register(displayName, email, password);
   }
 }

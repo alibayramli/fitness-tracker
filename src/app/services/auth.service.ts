@@ -6,6 +6,7 @@ import {
   signInWithEmailAndPassword,
   sendPasswordResetEmail,
   sendEmailVerification,
+  updateProfile,
 } from '@angular/fire/auth';
 import { BehaviorSubject } from 'rxjs';
 import { SnackBarService } from '../shared/services/snack-bar.service';
@@ -21,11 +22,15 @@ export class AuthService {
   private isSpinnerActive = new BehaviorSubject<boolean>(false);
   public isSpinnerActive$ = this.isSpinnerActive.asObservable();
 
-  public async register(email: string, password: string) {
+  public async register(displayName: string, email: string, password: string) {
     try {
       this.isSpinnerActive.next(true);
       await createUserWithEmailAndPassword(this.afAuth, email, password);
-      await this.verifyEmail();
+      const user = this.afAuth.currentUser;
+      if (user) {
+        await updateProfile(user, { displayName });
+        await sendEmailVerification(user);
+      }
       this.isSpinnerActive.next(false);
       this.snackbarService.openSnackBar('Verification sent to your email!');
       this.router.navigate(['auth-login']);
@@ -64,10 +69,10 @@ export class AuthService {
     try {
       this.isSpinnerActive.next(true);
       await sendPasswordResetEmail(this.afAuth, email);
+      this.isSpinnerActive.next(false);
       this.snackbarService.openSnackBar(
         'We sent you an email to recover your password'
       );
-      this.isSpinnerActive.next(false);
       this.router.navigate(['auth-login']);
     } catch (error) {
       this.isSpinnerActive.next(false);
@@ -81,13 +86,7 @@ export class AuthService {
     this.isSpinnerActive.next(true);
     await this.afAuth.signOut();
     this.isSpinnerActive.next(false);
+    this.snackbarService.openSnackBar('Logged out!');
     this.router.navigate(['auth-login']);
-  }
-
-  private async verifyEmail() {
-    const user = this.afAuth.currentUser;
-    if (user) {
-      await sendEmailVerification(user);
-    }
   }
 }
