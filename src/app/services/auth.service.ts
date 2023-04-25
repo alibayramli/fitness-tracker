@@ -26,6 +26,9 @@ export class AuthService {
       this.isSpinnerActive.next(true);
       await createUserWithEmailAndPassword(this.afAuth, email, password);
       await this.verifyEmail();
+      this.isSpinnerActive.next(false);
+      this.snackbarService.openSnackBar('Verification sent to your email!');
+      this.router.navigate(['auth-login']);
     } catch (error) {
       this.isSpinnerActive.next(false);
       if (error instanceof FirebaseError) {
@@ -86,8 +89,5 @@ export class AuthService {
     if (user) {
       await sendEmailVerification(user);
     }
-    this.isSpinnerActive.next(false);
-    this.snackbarService.openSnackBar('Verification sent to your email!');
-    this.router.navigate(['auth-login']);
   }
 }
