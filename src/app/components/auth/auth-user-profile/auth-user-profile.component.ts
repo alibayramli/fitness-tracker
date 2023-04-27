@@ -20,7 +20,7 @@ import { AuthService } from 'src/app/services/auth.service';
   styleUrls: ['./auth-user-profile.component.scss'],
 })
 export class AuthUserProfileComponent {
-  private authService = inject(AuthService);
+  public authService = inject(AuthService);
 
   logOut() {
     this.authService.logOut();
