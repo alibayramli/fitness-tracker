@@ -7,10 +7,11 @@ import {
   sendPasswordResetEmail,
   sendEmailVerification,
   updateProfile,
+  authState,
 } from '@angular/fire/auth';
-import { BehaviorSubject } from 'rxjs';
-import { SnackBarService } from '../shared/services/snack-bar.service';
+import { Observable, BehaviorSubject, map } from 'rxjs';
 import { FirebaseError } from 'firebase/app';
+import { SnackBarService } from '../shared/services/snack-bar.service';
 
 @Injectable({
   providedIn: 'root',
@@ -21,6 +22,17 @@ export class AuthService {
   private snackbarService = inject(SnackBarService);
   private isSpinnerActive = new BehaviorSubject<boolean>(false);
   public isSpinnerActive$ = this.isSpinnerActive.asObservable();
+  public isLoggedIn$: Observable<boolean>;
+
+  constructor() {
+    this.isLoggedIn$ = authState(this.afAuth).pipe(
+      map((state) => !!state && state.emailVerified)
+    );
+  }
+
+  public get userDisplayName() {
+    return this.afAuth.currentUser?.displayName;
+  }
 
   public async register(displayName: string, email: string, password: string) {
     try {
