@@ -4,8 +4,8 @@ export class SnackBarConfig {
   public static getDefaultConfig(): MatSnackBarConfig {
     return {
       duration: 3000,
-      horizontalPosition: 'right',
-      verticalPosition: 'top',
+      horizontalPosition: 'center',
+      verticalPosition: 'bottom',
       data: {},
     };
   }
