@@ -28,7 +28,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatToolbarModule } from '@angular/material/toolbar';
 
 import { AppComponent } from './app/components/app.component';
-import { APP_ROUTES } from './app/components/app.routes';
+import { APP_ROUTES } from './app/components/app.route';
 import { provideTransloco } from './app/utils/provideTransloco';
 import {
   AVAILABLE_LANGUAGES,

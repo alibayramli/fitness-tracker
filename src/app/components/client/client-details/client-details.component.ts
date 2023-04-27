@@ -26,7 +26,7 @@ import { SpinnerComponent } from 'src/app/shared/components/spinner/spinner.comp
     SpinnerComponent,
   ],
 })
-export class ClientDetailsComponent implements OnInit {
+export default class ClientDetailsComponent implements OnInit {
   public clientId!: number;
   clientDetail!: IClient;
 

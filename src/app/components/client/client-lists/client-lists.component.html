@@ -1,5 +1,5 @@
 <div class="flex justify-between items-baseline m-5" *transloco="let t">
-  <button routerLink="/client-register" mat-raised-button color="accent">
+  <button routerLink="/client/register" mat-raised-button color="accent">
     <mat-icon matSuffix>arrow_back</mat-icon> {{ t("backToRegistration") }}
   </button>
   <mat-form-field appearance="outline">
@@ -100,7 +100,7 @@
           class="grid sm:grid-cols-1 lg:grid-cols-3 gap-0"
         >
           <button
-            [routerLink]="['/client-details', row.id]"
+            [routerLink]="['/client/details', row.id]"
             mat-icon-button
             color="primary"
           >

@@ -36,7 +36,7 @@ import { SpinnerComponent } from 'src/app/shared/components/spinner/spinner.comp
   templateUrl: './auth-register.component.html',
   styleUrls: ['./auth-register.component.scss'],
 })
-export class AuthRegisterComponent implements OnInit {
+export default class AuthRegisterComponent implements OnInit {
   public registerForm!: FormGroup;
 
   constructor(private fb: FormBuilder, public authService: AuthService) {}

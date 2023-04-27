@@ -41,7 +41,7 @@ import { SpinnerComponent } from 'src/app/shared/components/spinner/spinner.comp
     SpinnerComponent,
   ],
 })
-export class ClientListsComponent implements OnInit, OnDestroy {
+export default class ClientListsComponent implements OnInit, OnDestroy {
   public dataSource!: MatTableDataSource<IClient>;
   public clients!: IClient[];
   public readonly displayedColumns = DISPLAYED_COLUMNS;
@@ -71,7 +71,7 @@ export class ClientListsComponent implements OnInit, OnDestroy {
   }
 
   editClient(id: number) {
-    this.router.navigate(['client-update', id]);
+    this.router.navigate(['client/update', id]);
   }
 
   deleteClient(id: number) {

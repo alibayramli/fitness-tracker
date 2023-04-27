@@ -36,7 +36,7 @@ import { SpinnerComponent } from 'src/app/shared/components/spinner/spinner.comp
   templateUrl: './auth-login.component.html',
   styleUrls: ['./auth-login.component.scss'],
 })
-export class AuthLoginComponent implements OnInit {
+export default class AuthLoginComponent implements OnInit {
   public loginForm!: FormGroup;
   constructor(private fb: FormBuilder, public authService: AuthService) {}
   ngOnInit(): void {

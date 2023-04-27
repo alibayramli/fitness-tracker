@@ -30,7 +30,7 @@ import { SpinnerComponent } from 'src/app/shared/components/spinner/spinner.comp
   templateUrl: './auth-recover-password.component.html',
   styleUrls: ['./auth-recover-password.component.scss'],
 })
-export class AuthRecoverPasswordComponent implements OnInit {
+export default class AuthRecoverPasswordComponent implements OnInit {
   forgotPasswordForm!: FormGroup;
 
   constructor(private fb: FormBuilder, public authService: AuthService) {}

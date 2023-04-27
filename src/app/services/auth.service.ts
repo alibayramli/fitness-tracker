@@ -45,7 +45,7 @@ export class AuthService {
       }
       this.isSpinnerActive.next(false);
       this.snackbarService.openSnackBar('Verification sent to your email!');
-      this.router.navigate(['auth-login']);
+      this.router.navigate(['auth/login']);
     } catch (error) {
       this.isSpinnerActive.next(false);
       if (error instanceof FirebaseError) {
@@ -64,10 +64,10 @@ export class AuthService {
       );
       this.isSpinnerActive.next(false);
       if (user.user?.emailVerified) {
-        this.router.navigate(['client-register']);
+        this.router.navigate(['client/register']);
         this.snackbarService.openSnackBar('Successful login!');
       } else {
-        this.router.navigate(['auth-verify-email']);
+        this.router.navigate(['auth/verify-email']);
       }
     } catch (error) {
       this.isSpinnerActive.next(false);
@@ -85,7 +85,7 @@ export class AuthService {
       this.snackbarService.openSnackBar(
         'We sent you an email to recover your password'
       );
-      this.router.navigate(['auth-login']);
+      this.router.navigate(['auth/login']);
     } catch (error) {
       this.isSpinnerActive.next(false);
       if (error instanceof FirebaseError) {
@@ -99,6 +99,6 @@ export class AuthService {
     await this.afAuth.signOut();
     this.isSpinnerActive.next(false);
     this.snackbarService.openSnackBar('Logged out!');
-    this.router.navigate(['auth-login']);
+    this.router.navigate(['auth/login']);
   }
 }

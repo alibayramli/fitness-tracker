@@ -1,6 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { AuthVerifyEmailComponent } from './auth-verify-email.component';
+import AuthVerifyEmailComponent from './auth-verify-email.component';
 
 describe('VerifyMailComponent', () => {
   let component: AuthVerifyEmailComponent;

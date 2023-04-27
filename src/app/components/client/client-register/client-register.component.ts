@@ -53,7 +53,7 @@ import { SpinnerComponent } from 'src/app/shared/components/spinner/spinner.comp
     SpinnerComponent,
   ],
 })
-export class ClientRegisterComponent implements OnInit {
+export default class ClientRegisterComponent implements OnInit {
   public readonly trainerOptions = TRAINER_OPTIONS;
   public readonly genders = GENDERS;
   public readonly packages = PACKAGES;
@@ -155,7 +155,7 @@ export class ClientRegisterComponent implements OnInit {
           RegisterClientSnackBar.REGISTER_SUCCESS
         );
         this.registerForm.reset();
-        this.router.navigate(['client-lists']);
+        this.router.navigate(['client/lists']);
       },
     });
   }
@@ -169,7 +169,7 @@ export class ClientRegisterComponent implements OnInit {
             RegisterClientSnackBar.UPDATE_SUCCESS
           );
           this.registerForm.reset();
-          this.router.navigate(['client-lists']);
+          this.router.navigate(['client/lists']);
         },
       });
   }
