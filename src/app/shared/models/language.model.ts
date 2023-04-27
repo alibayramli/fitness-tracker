@@ -4,7 +4,7 @@ export enum AvailableLanguages {
   AZERBAIJANI = 'Azerbaijani',
 }
 
-export const FileTitle = {
+export const AvailableLanguagesFileTitle = {
   [AvailableLanguages.ENGLISH]: 'en',
   [AvailableLanguages.FRENCH]: 'fr',
   [AvailableLanguages.AZERBAIJANI]: 'az',
