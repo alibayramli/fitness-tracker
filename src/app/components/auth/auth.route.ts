@@ -1,5 +1,9 @@
 import { Routes } from '@angular/router';
-import { isLoggedIn, isNotEmailVerified } from 'src/app/guards/auth.guard';
+import {
+  isLoggedIn,
+  isNotEmailVerified,
+  isNotLoggedIn,
+} from 'src/app/guards/auth.guard';
 import AuthRegisterComponent from './auth-register/auth-register.component';
 import AuthLoginComponent from './auth-login/auth-login.component';
 import AuthVerifyEmailComponent from './auth-verify-email/auth-verify-email.component';
@@ -18,6 +22,10 @@ export const AUTH_ROUTES: Routes = [
         path: 'login',
         component: AuthLoginComponent,
       },
+      {
+        path: 'recover-password',
+        component: AuthRecoverPasswordComponent,
+      },
     ],
   },
   {
@@ -28,5 +36,6 @@ export const AUTH_ROUTES: Routes = [
   {
     path: 'recover-password',
     component: AuthRecoverPasswordComponent,
+    canActivate: [isNotLoggedIn],
   },
 ];
