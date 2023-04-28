@@ -1,7 +1,7 @@
 import { Routes } from '@angular/router';
 import ClientRegisterComponent from './client-register/client-register.component';
 import ClientListsComponent from './client-lists/client-lists.component';
-import ClientDetailsComponent from './client-details/client-details.component';
+import ClientListComponent from './client-list/client-list.component';
 
 export const CLIENT_ROUTES: Routes = [
   {
@@ -9,8 +9,8 @@ export const CLIENT_ROUTES: Routes = [
     component: ClientListsComponent,
   },
   {
-    path: 'details/:id',
-    component: ClientDetailsComponent,
+    path: 'list/:id',
+    component: ClientListComponent,
   },
   {
     path: 'register',

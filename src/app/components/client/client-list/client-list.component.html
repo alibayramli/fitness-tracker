@@ -1,18 +1,18 @@
 <app-spinner
-  *ngIf="clientService.isSpinnerActive$ | async; else clientDetails"
+  *ngIf="clientService.isSpinnerActive$ | async; else clientList"
 ></app-spinner>
 
-<ng-template #clientDetails>
-  <mat-card *ngIf="clientDetail" class="w-8/12 block mx-auto my-8">
+<ng-template #clientList>
+  <mat-card *ngIf="client" class="w-8/12 block mx-auto my-8">
     <mat-card-header class="ml-3">
       <mat-icon matSuffix mat-card-avatar class="mt-1 text-4xl"
         >person</mat-icon
       >
       <mat-card-title
-        >{{ clientDetail.firstName }}
-        {{ clientDetail.lastName }}
+        >{{ client.firstName }}
+        {{ client.lastName }}
       </mat-card-title>
-      <mat-card-subtitle>{{ clientDetail.email }}</mat-card-subtitle>
+      <mat-card-subtitle>{{ client.email }}</mat-card-subtitle>
     </mat-card-header>
 
     <mat-card-content>
@@ -20,41 +20,41 @@
         <mat-list-item>
           <div matLine>
             Mobile Number:
-            <button mat-button>{{ clientDetail.lastName }}</button>
+            <button mat-button>{{ client.lastName }}</button>
           </div>
         </mat-list-item>
 
         <mat-list-item>
           <div matLine>
             Gender:
-            <button mat-button>{{ clientDetail.gender }}</button>
+            <button mat-button>{{ client.gender }}</button>
           </div>
         </mat-list-item>
 
         <mat-list-item>
           <div matLine>
             Package:
-            <button mat-button>{{ clientDetail.package }}</button>
+            <button mat-button>{{ client.package }}</button>
           </div>
         </mat-list-item>
 
         <mat-list-item>
           <div matLine>
             BMI:
-            <button mat-button>{{ clientDetail.bmi }}</button>
+            <button mat-button>{{ client.bmi }}</button>
           </div>
         </mat-list-item>
 
         <mat-list-item>
           <div matLine>
             BMI Result:
-            <button mat-button>{{ clientDetail.bmiResult }}</button>
+            <button mat-button>{{ client.bmiResult }}</button>
           </div>
         </mat-list-item>
         <mat-list-item>
           <div matLine>
             Trainer Require:
-            <button mat-button>{{ clientDetail.requireTrainer }}</button>
+            <button mat-button>{{ client.requireTrainer }}</button>
           </div>
         </mat-list-item>
         <mat-list-item>
@@ -62,7 +62,7 @@
             Goals:
             <button mat-button>
               <mat-chip-listbox>
-                <ng-container *ngFor="let row of clientDetail.importantGoals">
+                <ng-container *ngFor="let row of client.importantGoals">
                   <mat-chip-option selected>{{ row }}</mat-chip-option>
                 </ng-container>
               </mat-chip-listbox>

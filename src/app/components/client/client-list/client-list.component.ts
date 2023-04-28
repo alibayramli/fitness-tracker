@@ -12,9 +12,9 @@ import { IClient } from 'src/app/models/client.model';
 import { SpinnerComponent } from 'src/app/shared/components/spinner/spinner.component';
 
 @Component({
-  selector: 'app-client-detail',
-  templateUrl: './client-details.component.html',
-  styleUrls: ['./client-details.component.scss'],
+  selector: 'app-client-list',
+  templateUrl: './client-list.component.html',
+  styleUrls: ['./client-list.component.scss'],
   standalone: true,
   imports: [
     CommonModule,
@@ -26,9 +26,9 @@ import { SpinnerComponent } from 'src/app/shared/components/spinner/spinner.comp
     SpinnerComponent,
   ],
 })
-export default class ClientDetailsComponent implements OnInit {
+export default class ClientListComponent implements OnInit {
   public clientId!: number;
-  clientDetail!: IClient;
+  client!: IClient;
 
   constructor(
     private activatedRoute: ActivatedRoute,
@@ -45,7 +45,7 @@ export default class ClientDetailsComponent implements OnInit {
       )
       .subscribe({
         next: (client) => {
-          this.clientDetail = client;
+          this.client = client;
         },
       });
   }
