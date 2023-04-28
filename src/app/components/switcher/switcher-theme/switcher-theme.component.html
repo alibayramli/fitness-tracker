@@ -4,6 +4,6 @@
   aria-label="Toggle Dark Theme"
 >
   <mat-icon>{{
-    (themeService.isDarkMode$ | async) ? THEMES.LIGHT_MODE : THEMES.DARK_MODE
+    AvailableThemesMappingsDefault[themeService.themeMode]
   }}</mat-icon>
 </button>
