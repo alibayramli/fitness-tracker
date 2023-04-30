@@ -13,24 +13,18 @@ export class ThemeService {
   private _themeMode = AvailableThemes.LIGHT_MODE;
 
   public get themeMode() {
-    return this._themeMode as keyof typeof AvailableThemesMappingsDefault;
+    return this._themeMode;
   }
 
   constructor(@Inject(DOCUMENT) private document: Document) {
-    const themeModeSaved = localStorage.getItem('themeMode');
+    const themeModeSaved = localStorage.getItem('themeMode') as AvailableThemes;
     this._themeMode =
-      AvailableThemesMappingsDefault[
-        themeModeSaved as keyof typeof AvailableThemesMappingsDefault
-      ] || this._themeMode;
+      AvailableThemesMappingsDefault[themeModeSaved] || this._themeMode;
     this.setTheme();
   }
 
   public toggleThemeMode() {
-    this._themeMode =
-      AvailableThemesMappingsToggled[
-        this._themeMode as keyof typeof AvailableThemesMappingsDefault
-      ];
-
+    this._themeMode = AvailableThemesMappingsToggled[this._themeMode];
     localStorage.setItem('themeMode', this._themeMode);
     this.setTheme();
   }
