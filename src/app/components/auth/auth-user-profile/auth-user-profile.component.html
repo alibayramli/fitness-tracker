@@ -3,7 +3,7 @@
 </button>
 <mat-menu xPosition="before" #userActions="matMenu">
   <ng-container
-    *ngIf="authService.isLoggedIn$ | async as isLoggedIn; else authTmpl"
+    *ngIf="authService.isAuthenticated$ | async as isLoggedIn; else authTmpl"
   >
     <button mat-menu-item>
       <mat-icon matSuffix>person</mat-icon>

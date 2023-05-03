@@ -22,10 +22,10 @@ export class AuthService {
   private snackbarService = inject(SnackBarService);
   private isSpinnerActive = new BehaviorSubject<boolean>(false);
   public isSpinnerActive$ = this.isSpinnerActive.asObservable();
-  public isLoggedIn$: Observable<boolean>;
+  public isAuthenticated$: Observable<boolean>;
 
   constructor() {
-    this.isLoggedIn$ = authState(this.afAuth).pipe(
+    this.isAuthenticated$ = authState(this.afAuth).pipe(
       map((state) => !!state && state.emailVerified)
     );
   }
