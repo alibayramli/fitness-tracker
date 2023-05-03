@@ -27,5 +27,10 @@ export const APP_ROUTES: Routes = [
       import('./client/client.route').then((r) => r.CLIENT_ROUTES),
     canMatch: [isLoggedIn, isEmailVerified],
   },
-  { path: '**', redirectTo: '' },
+  {
+    path: '**',
+    redirectTo: '',
+    loadComponent: () =>
+      import('./access/access-not-found/access-not-found.component'),
+  },
 ];
