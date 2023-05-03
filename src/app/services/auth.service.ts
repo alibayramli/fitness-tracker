@@ -99,6 +99,6 @@ export class AuthService {
     await this.afAuth.signOut();
     this.isSpinnerActive.next(false);
     this.snackbarService.openSnackBar('Logged out!');
-    this.router.navigate(['auth/login']);
+    this.router.navigate(['']);
   }
 }
