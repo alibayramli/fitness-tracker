@@ -5,6 +5,11 @@ import ClientListComponent from './client-list/client-list.component';
 
 export const CLIENT_ROUTES: Routes = [
   {
+    path: '',
+    redirectTo: 'lists',
+    pathMatch: 'full',
+  },
+  {
     path: 'lists',
     component: ClientListsComponent,
   },

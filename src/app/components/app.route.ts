@@ -1,20 +1,30 @@
 import { Routes } from '@angular/router';
-import { isLoggedIn, isEmailVerified } from '../guards/auth.guard';
+import {
+  isLoggedIn,
+  isEmailVerified,
+  isNotEmailVerified,
+} from '../guards/auth.guard';
 
 export const APP_ROUTES: Routes = [
   {
     path: '',
-    redirectTo: '',
+    redirectTo: 'auth',
+    pathMatch: 'full',
+  },
+  {
+    path: '',
+    redirectTo: 'client',
     pathMatch: 'full',
   },
   {
     path: 'auth',
-    loadChildren: () => import('./auth/auth.route').then((m) => m.AUTH_ROUTES),
+    loadChildren: () => import('./auth/auth.route').then((r) => r.AUTH_ROUTES),
+    canMatch: [isNotEmailVerified],
   },
   {
     path: 'client',
     loadChildren: () =>
-      import('./client/client.route').then((m) => m.CLIENT_ROUTES),
+      import('./client/client.route').then((r) => r.CLIENT_ROUTES),
     canMatch: [isLoggedIn, isEmailVerified],
   },
   { path: '**', redirectTo: '' },
