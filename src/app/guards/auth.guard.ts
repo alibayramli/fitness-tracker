@@ -1,4 +1,5 @@
 import { inject } from '@angular/core';
+import { Router } from '@angular/router';
 import { Auth, authState } from '@angular/fire/auth';
 import { Firestore, doc, getDoc } from '@angular/fire/firestore';
 import { catchError, filter, map, of, switchMap } from 'rxjs';
@@ -27,6 +28,7 @@ export const isNotEmailVerified = () => {
 
 export const isAdmin = () => {
   const usersDb = inject(Firestore);
+  const router = inject(Router);
   return authStatus().pipe(
     switchMap((auth) => {
       const usersDocRef = doc(usersDb, `users/${auth?.uid}`);
@@ -34,7 +36,12 @@ export const isAdmin = () => {
     }),
     filter((doc) => {
       const user = { ...doc.data() } as IUser;
-      return user.isAdmin;
+      if (user.isAdmin) {
+        return true;
+      } else {
+        router.navigate(['not-authorized']);
+        return false;
+      }
     }),
     catchError(() => of(false))
   );

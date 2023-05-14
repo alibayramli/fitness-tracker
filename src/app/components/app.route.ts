@@ -3,7 +3,6 @@ import {
   isLoggedIn,
   isEmailVerified,
   isNotEmailVerified,
-  isAdmin,
 } from '../guards/auth.guard';
 
 export const APP_ROUTES: Routes = [
@@ -26,12 +25,17 @@ export const APP_ROUTES: Routes = [
     path: 'client',
     loadChildren: () =>
       import('./client/client.route').then((r) => r.CLIENT_ROUTES),
-    canMatch: [isLoggedIn, isEmailVerified, isAdmin],
+    canMatch: [isLoggedIn, isEmailVerified],
   },
   {
     path: 'not-found',
     loadComponent: () =>
       import('./access/access-not-found/access-not-found.component'),
+  },
+  {
+    path: 'not-authorized',
+    loadComponent: () =>
+      import('./access/access-not-authorized/access-not-authorized.component'),
   },
   {
     path: '**',

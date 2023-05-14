@@ -2,16 +2,18 @@ import { Routes } from '@angular/router';
 import ClientRegisterComponent from './client-register/client-register.component';
 import ClientListsComponent from './client-lists/client-lists.component';
 import ClientListComponent from './client-list/client-list.component';
+import { isAdmin } from 'src/app/guards/auth.guard';
 
 export const CLIENT_ROUTES: Routes = [
   {
     path: '',
-    redirectTo: 'lists',
+    redirectTo: 'register',
     pathMatch: 'full',
   },
   {
     path: 'lists',
     component: ClientListsComponent,
+    canMatch: [isAdmin],
   },
   {
     path: 'list/:id',
