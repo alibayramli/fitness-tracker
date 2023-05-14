@@ -29,9 +29,12 @@ export const APP_ROUTES: Routes = [
     canMatch: [isLoggedIn, isEmailVerified, isAdmin],
   },
   {
-    path: '**',
-    redirectTo: '',
+    path: 'not-found',
     loadComponent: () =>
       import('./access/access-not-found/access-not-found.component'),
+  },
+  {
+    path: '**',
+    redirectTo: 'not-found',
   },
 ];
