@@ -3,6 +3,7 @@ import {
   isLoggedIn,
   isEmailVerified,
   isNotEmailVerified,
+  isAdmin,
 } from '../guards/auth.guard';
 
 export const APP_ROUTES: Routes = [
@@ -25,7 +26,7 @@ export const APP_ROUTES: Routes = [
     path: 'client',
     loadChildren: () =>
       import('./client/client.route').then((r) => r.CLIENT_ROUTES),
-    canMatch: [isLoggedIn, isEmailVerified],
+    canMatch: [isLoggedIn, isEmailVerified, isAdmin],
   },
   {
     path: '**',
