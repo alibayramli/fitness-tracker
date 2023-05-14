@@ -27,5 +27,5 @@ export const CLIENT_ROUTES: Routes = [
     path: 'update/:id',
     component: ClientRegisterComponent,
   },
-  { path: '**', redirectTo: 'lists' },
+  { path: '**', redirectTo: 'register' },
 ];
