@@ -9,9 +9,11 @@ import {
   updateProfile,
   authState,
 } from '@angular/fire/auth';
-import { Observable, BehaviorSubject, map } from 'rxjs';
+import { Firestore, setDoc, doc } from '@angular/fire/firestore';
 import { FirebaseError } from 'firebase/app';
+import { Observable, BehaviorSubject, map } from 'rxjs';
 import { SnackBarService } from '../shared/services/snack-bar.service';
+import { IUser } from '../models/user.model';
 
 @Injectable({
   providedIn: 'root',
@@ -19,7 +21,9 @@ import { SnackBarService } from '../shared/services/snack-bar.service';
 export class AuthService {
   private router = inject(Router);
   private afAuth = inject(Auth);
+  private db = inject(Firestore);
   private snackbarService = inject(SnackBarService);
+
   private isSpinnerActive = new BehaviorSubject<boolean>(false);
   public isSpinnerActive$ = this.isSpinnerActive.asObservable();
   public isAuthenticated$: Observable<boolean>;
@@ -42,6 +46,9 @@ export class AuthService {
       if (user) {
         await updateProfile(user, { displayName });
         await sendEmailVerification(user);
+        // Note: this is NOT a safe way to create an admin user,
+        // implemented for demonstration purposes!
+        await this.saveUser(user.uid, { displayName, email, isAdmin: false });
       }
       this.isSpinnerActive.next(false);
       this.snackbarService.openSnackBar('Verification sent to your email!');
@@ -100,5 +107,9 @@ export class AuthService {
     this.isSpinnerActive.next(false);
     this.snackbarService.openSnackBar('Logged out!');
     this.router.navigate(['']);
+  }
+
+  private async saveUser(id: string, user: IUser) {
+    await setDoc(doc(this.db, 'users', id), user);
   }
 }
