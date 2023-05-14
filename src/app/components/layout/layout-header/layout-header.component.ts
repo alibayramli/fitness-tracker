@@ -1,5 +1,5 @@
-import { Component } from '@angular/core';
-import { AsyncPipe, NgFor } from '@angular/common';
+import { Component, inject } from '@angular/core';
+import { CommonModule } from '@angular/common';
 import { RouterLink } from '@angular/router';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
@@ -8,6 +8,7 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatMenuModule } from '@angular/material/menu';
 import { TranslocoModule } from '@ngneat/transloco';
 
+import { AuthService } from 'src/app/services/auth.service';
 import { AuthUserProfileComponent } from '../../auth/auth-user-profile/auth-user-profile.component';
 import { SwitcherLanguageComponent } from '../../switcher/switcher-language/switcher-language.component';
 import { SwitcherThemeComponent } from '../../switcher/switcher-theme/switcher-theme.component';
@@ -18,9 +19,8 @@ import { SwitcherThemeComponent } from '../../switcher/switcher-theme/switcher-t
   styleUrls: ['./layout-header.component.scss'],
   standalone: true,
   imports: [
-    NgFor,
+    CommonModule,
     RouterLink,
-    AsyncPipe,
     MatToolbarModule,
     MatButtonModule,
     MatIconModule,
@@ -32,4 +32,6 @@ import { SwitcherThemeComponent } from '../../switcher/switcher-theme/switcher-t
     AuthUserProfileComponent,
   ],
 })
-export class LayoutHeaderComponent {}
+export class LayoutHeaderComponent {
+  public authService = inject(AuthService);
+}
