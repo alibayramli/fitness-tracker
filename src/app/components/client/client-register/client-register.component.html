@@ -4,12 +4,8 @@
 
 <ng-template #formRegister>
   <div class="registration-form m-3 p-3">
-    <img
-      width="200"
-      src="assets/images/app-logo.jpg"
-      alt="App logo"
-      class="mx-auto mb-3"
-    />
+    <app-logo [width]="100" class="flex justify-around mb-2"></app-logo>
+
     <form [formGroup]="registerForm">
       <div class="grid sm:grid-cols-1 md:grid-cols-2 gap-4">
         <mat-form-field appearance="outline">

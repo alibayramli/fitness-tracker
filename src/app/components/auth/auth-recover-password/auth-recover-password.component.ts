@@ -13,6 +13,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatCardModule } from '@angular/material/card';
 import { AuthService } from 'src/app/services/auth.service';
 import { SpinnerComponent } from 'src/app/shared/components/spinner/spinner.component';
+import { AppLogoComponent } from 'src/app/shared/components/app-logo/app-logo.component';
 
 @Component({
   selector: 'app-recover-password',
@@ -26,6 +27,7 @@ import { SpinnerComponent } from 'src/app/shared/components/spinner/spinner.comp
     MatFormFieldModule,
     MatCardModule,
     SpinnerComponent,
+    AppLogoComponent,
   ],
   templateUrl: './auth-recover-password.component.html',
   styleUrls: ['./auth-recover-password.component.scss'],

@@ -16,6 +16,7 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatCardModule } from '@angular/material/card';
 import { AuthService } from 'src/app/services/auth.service';
 import { SpinnerComponent } from 'src/app/shared/components/spinner/spinner.component';
+import { AppLogoComponent } from 'src/app/shared/components/app-logo/app-logo.component';
 
 @Component({
   selector: 'app-auth-register',
@@ -32,6 +33,7 @@ import { SpinnerComponent } from 'src/app/shared/components/spinner/spinner.comp
     MatCheckboxModule,
     MatCardModule,
     SpinnerComponent,
+    AppLogoComponent,
   ],
   templateUrl: './auth-register.component.html',
   styleUrls: ['./auth-register.component.scss'],

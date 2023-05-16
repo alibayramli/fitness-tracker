@@ -16,6 +16,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatCardModule } from '@angular/material/card';
 import { AuthService } from 'src/app/services/auth.service';
 import { SpinnerComponent } from 'src/app/shared/components/spinner/spinner.component';
+import { AppLogoComponent } from 'src/app/shared/components/app-logo/app-logo.component';
 
 @Component({
   selector: 'app-auth-login',
@@ -32,6 +33,7 @@ import { SpinnerComponent } from 'src/app/shared/components/spinner/spinner.comp
     MatCheckboxModule,
     MatCardModule,
     SpinnerComponent,
+    AppLogoComponent,
   ],
   templateUrl: './auth-login.component.html',
   styleUrls: ['./auth-login.component.scss'],

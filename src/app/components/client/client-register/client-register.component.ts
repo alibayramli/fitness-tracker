@@ -33,6 +33,7 @@ import {
   BMIResult,
 } from './client-register.constant';
 import { SpinnerComponent } from 'src/app/shared/components/spinner/spinner.component';
+import { AppLogoComponent } from 'src/app/shared/components/app-logo/app-logo.component';
 
 @Component({
   selector: 'app-register-client',
@@ -51,6 +52,7 @@ import { SpinnerComponent } from 'src/app/shared/components/spinner/spinner.comp
     MatDatepickerModule,
     MatButtonModule,
     SpinnerComponent,
+    AppLogoComponent,
   ],
 })
 export default class ClientRegisterComponent implements OnInit {
