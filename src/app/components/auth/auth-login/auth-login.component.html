@@ -84,10 +84,10 @@
             class="fuse-mat-button-large w-full mt-6"
             mat-flat-button
             [color]="'primary'"
-            [disabled]="loginForm.disabled"
+            [disabled]="loginForm.invalid"
             type="submit"
           >
-            <span *ngIf="!loginForm.disabled"> Login </span>
+            <span>Login</span>
           </button>
         </form>
       </div>

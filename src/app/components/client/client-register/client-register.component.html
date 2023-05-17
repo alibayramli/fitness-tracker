@@ -157,7 +157,7 @@
       <button
         *ngIf="!isUpdateActive"
         (click)="submitClient()"
-        [disabled]="!registerForm.valid"
+        [disabled]="registerForm.invalid"
         class="mt-4"
         mat-raised-button
         color="accent"
