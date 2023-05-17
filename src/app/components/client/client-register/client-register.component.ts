@@ -79,9 +79,9 @@ export default class ClientRegisterComponent implements OnInit {
 
   ngOnInit(): void {
     this.registerForm = this.fb.group({
-      firstName: ['', Validators.required],
-      lastName: ['', Validators.required],
-      email: ['', [Validators.email]],
+      firstName: { value: '', disabled: true },
+      lastName: { value: '', disabled: true },
+      email: { value: '', disabled: true },
       mobile: [''],
       height: [
         '',
