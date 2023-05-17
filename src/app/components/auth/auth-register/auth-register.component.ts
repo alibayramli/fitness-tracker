@@ -2,9 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import {
-  FormBuilder,
-  FormGroup,
   ReactiveFormsModule,
+  FormGroup,
+  FormBuilder,
   Validators,
 } from '@angular/forms';
 import { MatDividerModule } from '@angular/material/divider';
@@ -17,6 +17,8 @@ import { MatCardModule } from '@angular/material/card';
 import { AuthService } from 'src/app/services/auth.service';
 import { SpinnerComponent } from 'src/app/shared/components/spinner/spinner.component';
 import { AppLogoComponent } from 'src/app/shared/components/app-logo/app-logo.component';
+import { User } from 'src/app/models/user.model';
+import { passwordMatchValidator } from 'src/app/utils/auth/auth-register-validators';
 
 @Component({
   selector: 'app-auth-register',
@@ -43,17 +45,25 @@ export default class AuthRegisterComponent implements OnInit {
 
   constructor(private fb: FormBuilder, public authService: AuthService) {}
   ngOnInit(): void {
-    this.registerForm = this.fb.group({
-      name: ['', Validators.required],
-      email: ['', [Validators.required, Validators.email]],
-      password: ['', Validators.required],
-      repeatPassword: ['', Validators.required],
-    });
+    this.registerForm = this.fb.group(
+      {
+        firstName: ['', Validators.required],
+        lastName: ['', Validators.required],
+        email: ['', [Validators.required, Validators.email]],
+        password: ['', Validators.required],
+        repeatPassword: ['', Validators.required],
+      },
+      {
+        validators: passwordMatchValidator('password', 'repeatPassword'),
+      }
+    );
   }
   register(): void {
-    const displayName = this.registerForm.get('name')?.value.split(' ')[0];
+    const firstName = this.registerForm.get('firstName')?.value;
+    const lastName = this.registerForm.get('lastName')?.value;
     const email = this.registerForm.get('email')?.value;
     const password = this.registerForm.get('password')?.value;
-    this.authService.register(displayName, email, password);
+    const newUser = new User({ firstName, lastName, email, password });
+    this.authService.register(newUser);
   }
 }
