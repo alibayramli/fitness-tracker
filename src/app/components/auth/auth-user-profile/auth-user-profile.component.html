@@ -7,7 +7,7 @@
   >
     <button mat-menu-item>
       <mat-icon matSuffix>person</mat-icon>
-      <p>{{ authService.userDisplayName }}</p>
+      <p>{{ authService.userData?.displayName }}</p>
     </button>
     <button mat-menu-item (click)="logOut()">
       <mat-icon matSuffix>remove_red_eye</mat-icon>

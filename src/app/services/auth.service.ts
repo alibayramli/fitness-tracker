@@ -34,21 +34,24 @@ export class AuthService {
     );
   }
 
-  public get userDisplayName() {
-    return this.afAuth.currentUser?.displayName;
+  public get userData() {
+    return this.afAuth.currentUser;
   }
 
-  public async register(displayName: string, email: string, password: string) {
+  public async register(newUser: IUser) {
     try {
       this.isSpinnerActive.next(true);
-      await createUserWithEmailAndPassword(this.afAuth, email, password);
-      const user = this.afAuth.currentUser;
-      if (user) {
-        await updateProfile(user, { displayName });
-        await sendEmailVerification(user);
+      await createUserWithEmailAndPassword(
+        this.afAuth,
+        newUser.email,
+        newUser.password
+      );
+      if (this.userData) {
+        await updateProfile(this.userData, { displayName: newUser.firstName });
+        await sendEmailVerification(this.userData);
         // Note: this is NOT a safe way to create an admin user,
         // implemented for demonstration purposes!
-        await this.saveUser(user.uid, { displayName, email, isAdmin: false });
+        await this.saveUser(this.userData.uid, newUser);
       }
       this.isSpinnerActive.next(false);
       this.snackbarService.openSnackBar('Verification sent to your email!');
@@ -110,6 +113,7 @@ export class AuthService {
   }
 
   private async saveUser(id: string, user: IUser) {
-    await setDoc(doc(this.db, 'users', id), user);
+    const { password, ...credentialsToStore } = user;
+    await setDoc(doc(this.db, 'users', id), credentialsToStore);
   }
 }
