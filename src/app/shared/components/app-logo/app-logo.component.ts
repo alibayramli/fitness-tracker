@@ -9,5 +9,5 @@ import { CommonModule } from '@angular/common';
   styleUrls: ['./app-logo.component.scss'],
 })
 export class AppLogoComponent {
-  @Input() width = 50;
+  @Input({ required: true }) width!: number;
 }
