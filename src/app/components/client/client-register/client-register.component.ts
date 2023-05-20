@@ -21,7 +21,6 @@ import { ClientService } from 'src/app/services/client.service';
 import { SnackBarService } from 'src/app/shared/services/snack-bar.service';
 import {
   TRAINER_OPTIONS,
-  GENDERS,
   PACKAGES,
   IMPORTANT_GOALS,
   HAVE_BEEN_IN_GYM_BEFORE,
@@ -57,7 +56,6 @@ import { AppLogoComponent } from 'src/app/shared/components/app-logo/app-logo.co
 })
 export default class ClientRegisterComponent implements OnInit {
   public readonly trainerOptions = TRAINER_OPTIONS;
-  public readonly genders = GENDERS;
   public readonly packages = PACKAGES;
   public readonly importantGoals = IMPORTANT_GOALS;
   public readonly haveBeenInGymBefore = HAVE_BEEN_IN_GYM_BEFORE;
@@ -79,9 +77,6 @@ export default class ClientRegisterComponent implements OnInit {
 
   ngOnInit(): void {
     this.registerForm = this.fb.group({
-      firstName: { value: '', disabled: true },
-      lastName: { value: '', disabled: true },
-      email: { value: '', disabled: true },
       mobile: [''],
       height: [
         '',
@@ -101,7 +96,6 @@ export default class ClientRegisterComponent implements OnInit {
       ],
       bmi: [''],
       bmiResult: [''],
-      gender: [''],
       requireTrainer: [''],
       package: [''],
       importantGoals: [''],
@@ -178,15 +172,11 @@ export default class ClientRegisterComponent implements OnInit {
 
   private fillFormToUpdate(client: IClient) {
     this.registerForm.setValue({
-      firstName: client.firstName,
-      lastName: client.lastName,
-      email: client.email,
       mobile: client.mobile,
       height: client.height,
       weight: client.weight,
       bmi: client.bmi,
       bmiResult: client.bmiResult,
-      gender: client.gender,
       requireTrainer: client.requireTrainer,
       package: client.package,
       importantGoals: client.importantGoals,
