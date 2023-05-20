@@ -1,6 +1,7 @@
 export interface IUser {
   firstName: string;
   lastName: string;
+  gender?: string;
   email: string;
   password: string;
   isAdmin: boolean;
@@ -9,6 +10,7 @@ export interface IUser {
 export class User implements IUser {
   firstName!: string;
   lastName!: string;
+  gender!: string;
   email!: string;
   password!: string;
   isAdmin = false;
