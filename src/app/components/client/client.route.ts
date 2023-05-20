@@ -14,18 +14,22 @@ export const CLIENT_ROUTES: Routes = [
     path: 'lists',
     component: ClientListsComponent,
     canMatch: [isAdmin],
+    title: 'Client lists',
   },
   {
     path: 'list/:id',
     component: ClientListComponent,
+    title: 'Client details',
   },
   {
     path: 'register',
     component: ClientRegisterComponent,
+    title: 'Register',
   },
   {
     path: 'update/:id',
     component: ClientRegisterComponent,
+    title: 'Update',
   },
   { path: '**', redirectTo: 'register' },
 ];

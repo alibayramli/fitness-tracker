@@ -14,23 +14,23 @@ export const AUTH_ROUTES: Routes = [
   {
     path: 'register',
     component: AuthRegisterComponent,
+    title: 'Register',
   },
   {
     path: 'login',
     component: AuthLoginComponent,
+    title: 'Login',
   },
   {
     path: 'recover-password',
     component: AuthRecoverPasswordComponent,
+    title: 'Recover password',
   },
   {
     path: 'verify-email',
     component: AuthVerifyEmailComponent,
     canActivate: [isLoggedIn],
-  },
-  {
-    path: 'recover-password',
-    component: AuthRecoverPasswordComponent,
+    title: 'Verify Email',
   },
   { path: '**', redirectTo: 'login' },
 ];
