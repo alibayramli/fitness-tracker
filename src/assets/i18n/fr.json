@@ -1,6 +1,5 @@
 {
-  "hello": "Bonjour",
-  "clientRegistration": "Enregistrement des clients",
+  "fitnessTracker": "Traqueur de Fitness",
   "inquiries": "Enquêtes",
-  "backToRegistration": "Retour à l'inscription"
+  "registration": "Inscription"
 }

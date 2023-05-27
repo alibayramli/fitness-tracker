@@ -1,6 +1,5 @@
 {
-  "hello": "Salam",
-  "clientRegistration": "Müştəri qeydiyyatı",
+  "fitnessTracker": "Fitness Izləyicisi",
   "inquiries": "Sorğular",
-  "backToRegistration": "Qeydiyyat səhifəsinə qayıt"
+  "registration": "Qeydiyyat"
 }

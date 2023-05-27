@@ -1,6 +1,5 @@
 {
-  "hello": "Hello",
-  "clientRegistration": "Client registration",
+  "fitnessTracker": "Fitness Tracker",
   "inquiries": "Inquiries",
-  "backToRegistration": "Back to registration"
+  "registration": "Registration"
 }
